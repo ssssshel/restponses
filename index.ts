@@ -1,27 +1,31 @@
 import { BaseResponse, GenericInformativeResponse } from "./src/interfaces/bases";
-import { defaultStatesContent } from "./src/interfaces/status_codes";
+import { defaultStatesContent, HttpStatus } from "./src/interfaces/status_codes";
 import { StatusCode1xx } from "./src/utils/state_codes";
 
 
 export function Response1xxInformative(statusCode: StatusCode1xx, input: BaseResponse): GenericInformativeResponse {
 
-  let defaultValues
-
-  switch (statusCode) {
-    case 100:
-      defaultValues = defaultStatesContent["Status100Continue"]
-      break;
-
-    default:
-      break;
+  const defaultValuesSelector = (): HttpStatus => {
+    switch (statusCode) {
+      case 100:
+        return defaultStatesContent["Status100Continue"]
+      case 101:
+        return defaultStatesContent["Status101SwitchingProtocols"]
+      case 102:
+        return defaultStatesContent["Status102Processing"]
+      case 103:
+        return defaultStatesContent["Status103EarlyHints"]
+      default:
+        return defaultStatesContent["Status100Continue"]
+    }
   }
-  const f = defaultStatesContent["Status100Continue"]
-  console.log({ f })
+
+  const defaultValues = defaultValuesSelector()
 
   return {
     httpStatus: statusCode,
-    serverMessage: input.serverMessage,
-    detail: input.detail,
+    serverMessage: input.serverMessage || defaultValues.Message,
+    detail: input.detail || defaultValues.Details,
     consultedResource: input.consultedResource
   }
 }

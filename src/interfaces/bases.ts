@@ -6,7 +6,7 @@ interface SuccessErrorProps {
 }
 
 export interface BaseResponse {
-  serverMessage: string
+  serverMessage?: string
   detail?: string
   consultedResource?: string
 }

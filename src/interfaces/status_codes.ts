@@ -1,4 +1,4 @@
-interface HttpStatus {
+export interface HttpStatus {
   Code: StatusCode;
   Message: string;
   Details: string;
