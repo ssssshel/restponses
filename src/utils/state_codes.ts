@@ -26,7 +26,7 @@ export enum StatusCode3xx {
   Status304 = 304, // Not Modified
   Status305 = 305, // Use Proxy
   Status307 = 307, // Temporary Redirect
-  Status308 = 309, // Permanent Redirect
+  Status308 = 308, // Permanent Redirect
 }
 
 export enum StatusCode4xx {

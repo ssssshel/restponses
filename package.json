@@ -7,7 +7,7 @@
   "scripts": {
     "start": "ts-node index",
     "dev": "nodemon src/index",
-    "test": "ts-node sss.ts"
+    "test": "ts-node tests/index"
   },
   "repository": {
     "type": "git",

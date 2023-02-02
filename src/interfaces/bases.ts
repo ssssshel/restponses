@@ -1,16 +1,17 @@
-import { StatusCode1xx, StatusCode2xx } from "../utils/state_codes";
+import { StatusCode1xx, StatusCode2xx, StatusCode3xx } from "../utils/state_codes";
 
 interface SuccessErrorProps {
   success: boolean
   error: boolean
 }
 
-// 100s
 export interface BaseInput {
   serverMessage?: string
   detail?: string
   consultedResource?: string
 }
+
+// 100s
 
 export interface GenericInformativeResponse extends BaseInput {
   httpStatus: StatusCode1xx
@@ -30,16 +31,37 @@ export interface GenericSuccessfullResponse extends BaseSuccessfullInput, Succes
   states?: IBasicState207[] //207 ONLY | Array of states
 }
 
-interface ISource203 {
+export interface ISource203 {
   name: string
-  description: string
-  url: string
+  description?: string
+  url?: string
 }
 
-interface IBasicState207 {
+export interface IBasicState207 {
   httpStatus: number
   serverMessage: string
-  detail: string
+  detail?: string
 }
 
 // 300s
+
+export interface GenericRedirectionResponse extends BaseInput {
+  httpStatus: StatusCode3xx
+
+  options?: any[] // 300 ONLY | Array of options,
+  sources?: ISources301[] // 301 ONLY
+  /*
+      Redirect for multiple states:
+       - 302 => Temporary redirect URL
+       - 303 => URL to which the GET request should be made
+       - 307 => Temporary redirect URL that should be queried with the same HTTP method
+       - 308 => Permanent redirect URL that should be queried with tha same HTTP method
+    */
+  redirectUrl?: string
+  proxyUrl?: string // 305 ONLY | URL of the proxy
+}
+
+export interface ISources301 {
+  oldSource: string
+  newSource: string
+}

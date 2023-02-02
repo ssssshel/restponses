@@ -1,7 +1,7 @@
-import { BaseInput, BaseSuccessfullInput, GenericInformativeResponse, GenericSuccessfullResponse } from "./src/interfaces/bases";
+import { BaseInput, BaseSuccessfullInput, GenericInformativeResponse, GenericRedirectionResponse, GenericSuccessfullResponse } from "./src/interfaces/bases";
 import { defaultStatesContent, HttpStatus } from "./src/interfaces/status_codes";
-import { StatusCode1xx, StatusCode2xx } from "./src/utils/state_codes";
-import { Response2xxOpt } from "./src/methods/options_pattern"
+import { StatusCode1xx, StatusCode2xx, StatusCode3xx } from "./src/utils/state_codes";
+import { Response2xxOpt, Response3xxOpt } from "./src/methods/options_pattern"
 
 
 export function Response1xxInformative(statusCode: StatusCode1xx, input: BaseInput): GenericInformativeResponse {
@@ -77,8 +77,42 @@ export function Response2xzSuccessfull(statusCode: StatusCode2xx, input: BaseSuc
   return response
 }
 
-export function Response3xxRedirection() {
+export function Response3xxRedirection(statusCode: StatusCode3xx, input: BaseInput, statusOptions: Response3xxOpt): GenericRedirectionResponse {
+  const defaultValuesSelector = (): HttpStatus => {
+    switch (statusCode) {
+      case 300:
+        return defaultStatesContent["Status300MultipleChoices"]
+      case 301:
+        return defaultStatesContent["Status301MovedPermanently"]
+      case 302:
+        return defaultStatesContent["Status302Found"]
+      case 303:
+        return defaultStatesContent["Status303SeeOther"]
+      case 304:
+        return defaultStatesContent["Status304NotModified"]
+      case 305:
+        return defaultStatesContent["Status305UseProxy"]
+      case 307:
+        return defaultStatesContent["Status307TemporaryRedirect"]
+      case 308:
+        return defaultStatesContent["Status308PermanentRedirect"]
+      default:
+        return defaultStatesContent["Status300MultipleChoices"]
+    }
+  }
 
+  const defaultValues = defaultValuesSelector()
+
+  let response: GenericRedirectionResponse = {
+    httpStatus: statusCode,
+    serverMessage: input.serverMessage || defaultValues.Message,
+    detail: input.detail || defaultValues.Details,
+    consultedResource: input.consultedResource,
+  }
+
+  statusOptions(response)
+
+  return response
 }
 
 export function Response4xxClientError() {
