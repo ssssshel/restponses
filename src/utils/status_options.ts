@@ -9,7 +9,7 @@ export function Status201Opt(location: string): Response2xxOpt {
   }
 }
 
-export function Statsu202Opt(requestId: string): Response2xxOpt {
+export function Status202Opt(requestId: string): Response2xxOpt {
   return function (props: GenericSuccessfullResponse) {
     return props.requestId = requestId
   }
@@ -72,3 +72,4 @@ export function Status308Opt(redirectUrl: string): Response3xxOpt {
 }
 
 // 400s
+
