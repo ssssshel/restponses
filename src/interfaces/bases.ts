@@ -1,4 +1,4 @@
-import { StatusCode1xx, StatusCode2xx, StatusCode3xx, StatusCode4xx } from "../utils/state_codes";
+import { StatusCode1xx, StatusCode2xx, StatusCode3xx, StatusCode4xx, StatusCode5xx } from "../utils/state_codes";
 
 interface SuccessErrorProps {
   success: boolean
@@ -100,4 +100,10 @@ export interface ClientErrorDetails {
   supportedContentRange?: string // 416 ONLY | Supported content range | e.g., "bytes=0-1000"
   lockedResource?: string // 423 ONLY | Locked resource | e.g., "api/potato"
   failedDependency?: string // 424 ONLY | Failed dependency | e.g., "api/potato"
+}
+
+// 500s
+
+export interface GenericServerErrorResponse extends BaseErrorInput, SuccessErrorProps {
+  httpStatus: StatusCode5xx
 }

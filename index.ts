@@ -1,6 +1,6 @@
-import { BaseErrorInput, BaseInput, BaseSuccessfullInput, GenericClientErrorResponse, GenericInformativeResponse, GenericRedirectionResponse, GenericSuccessfullResponse } from "./src/interfaces/bases";
+import { BaseErrorInput, BaseInput, BaseSuccessfullInput, GenericClientErrorResponse, GenericInformativeResponse, GenericRedirectionResponse, GenericServerErrorResponse, GenericSuccessfullResponse } from "./src/interfaces/bases";
 import { defaultStatesContent, HttpStatus } from "./src/interfaces/status_codes";
-import { StatusCode1xx, StatusCode2xx, StatusCode3xx, StatusCode4xx } from "./src/utils/state_codes";
+import { StatusCode1xx, StatusCode2xx, StatusCode3xx, StatusCode4xx, StatusCode5xx } from "./src/utils/state_codes";
 import { Response2xxOpt, Response3xxOpt, Response4xxOpt } from "./src/methods/options_pattern"
 
 
@@ -198,6 +198,50 @@ export function Response4xxClientError(statusCode: StatusCode4xx, input?: BaseEr
 
 }
 
-export function Response5xxServerError() {
+export function Response5xxServerError(statusCode: StatusCode5xx, input?: BaseErrorInput): GenericServerErrorResponse {
+  const defaultValuesSelector = (): HttpStatus => {
+    switch (statusCode) {
+      case 500:
+        return defaultStatesContent["Status500InternalServerError"]
+      case 501:
+        return defaultStatesContent["Status501NotImplemented"]
+      case 502:
+        return defaultStatesContent["Status502BadGateway"]
+      case 503:
+        return defaultStatesContent["Status503ServiceUnavailable"]
+      case 504:
+        return defaultStatesContent["Status504GatewayTimeout"]
+      case 505:
+        return defaultStatesContent["Status505HTTPVersionNotSupported"]
+      case 506:
+        return defaultStatesContent["Status506VariantAlsoNegotiates"]
+      case 507:
+        return defaultStatesContent["Status507InsufficientStorage"]
+      case 508:
+        return defaultStatesContent["Status508LoopDetected"]
+      case 509:
+        return defaultStatesContent["Status509BandwidthLimitExceeded"]
+      case 510:
+        return defaultStatesContent["Status510NotExtended"]
+      case 511:
+        return defaultStatesContent["Status511NetworkAuthenticationRequired"]
+      case 521:
+        return defaultStatesContent["Status521WebServerIsDown"]
+      default:
+        return defaultStatesContent["Status500InternalServerError"]
+    }
+  }
 
+  let response: GenericServerErrorResponse = {
+    httpStatus: statusCode,
+    serverMessage: input?.serverMessage || defaultValuesSelector().Message,
+    detail: input?.detail || defaultValuesSelector().Details,
+    consultedResource: input?.consultedResource,
+
+    errors: input?.errors,
+    error: true,
+    success: false
+  }
+
+  return response
 }
