@@ -1,0 +1,13 @@
+import { IBasicState207, ISource203, ISources301 } from "../interfaces/bases";
+import { Response2xxOpt, Response3xxOpt } from "../methods/options_pattern";
+export declare function Status201Opt(location: string): Response2xxOpt;
+export declare function Status202Opt(requestId: string): Response2xxOpt;
+export declare function Status203Opt(source: ISource203): Response2xxOpt;
+export declare function Status207Opt(states: IBasicState207[]): Response2xxOpt;
+export declare function Status300Opt(options: any[]): Response3xxOpt;
+export declare function Status301Opt(sources: ISources301[]): Response3xxOpt;
+export declare function Status302Opt(redirectUrl: string): Response3xxOpt;
+export declare function Status303Opt(redirectUrl: string): Response3xxOpt;
+export declare function Status305Opt(proxyUrl: string): Response3xxOpt;
+export declare function Status307Opt(redirectUrl: string): Response3xxOpt;
+export declare function Status308Opt(redirectUrl: string): Response3xxOpt;

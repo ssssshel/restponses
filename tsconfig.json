@@ -2,13 +2,19 @@
   "extends": "@tsconfig/node16/tsconfig.json",
   "compilerOptions": {
     "lib": ["ES2022"], // ES2020 in earlier versions
-    "module": "ES2022", //ESNext 
+    "module": "CommonJS", //ESNext 
     "moduleResolution": "Node",
     "target": "ES2022", // ES2020 in earlier versions
     "esModuleInterop": true,
+
+    "types": ["node", "jest"],
+    "resolveJsonModule": true,
+    "sourceMap": true,
+    "outDir": "dist",
+    
   },
   "ts-node": {"esm": true, "experimentalSpecifierResolution": "node"},
   "lib": ["esnext"],
-  "include": ["src", "state_codes.ts", "src/test"],
-  "exclude": ["node_modules"]
+  "include": ["."],
+  "exclude": ["./dist","node_modules"]
 }
