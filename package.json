@@ -1,6 +1,6 @@
 {
   "name": "restponses",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "description": "Restponses library for node",
   "main": "dist/index.js",
   "source": "index.ts",
