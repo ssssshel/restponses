@@ -1,5 +1,5 @@
-import { GenericRedirectionResponse, GenericSuccessfullResponse, IBasicState207, ISource203, ISources301 } from "../interfaces/bases";
-import { Response2xxOpt, Response3xxOpt } from "../methods/options_pattern";
+import { GenericRedirectionResponse, GenericSuccessfullResponse, IBasicState207, ISource203, ISources301 } from "./src/interfaces/bases";
+import { Response2xxOpt, Response3xxOpt } from "./src/methods/options_pattern";
 
 // 200s
 
@@ -73,3 +73,8 @@ export function Status308Opt(redirectUrl: string): Response3xxOpt {
 
 // 400s
 
+// export function Status400Opt(detail: string): Response4xxOpt {
+//   return function (props: GenericErrorResponse) {
+//     return props.detail = detail
+//   }
+// }

@@ -1,7 +1,7 @@
 export interface HttpStatus {
     Code: StatusCode;
     Message: string;
-    Details: string;
+    Details?: string;
 }
 declare enum StatusCode {
     Status100 = 100,

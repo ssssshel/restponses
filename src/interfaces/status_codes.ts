@@ -1,7 +1,7 @@
 export interface HttpStatus {
   Code: StatusCode;
   Message: string;
-  Details: string;
+  Details?: string;
 }
 
 
@@ -199,147 +199,147 @@ export const defaultStatesContent: IDefaultStateContent = {
   "Status400BadRequest": {
     Code: StatusCode.Status400,
     Message: "Bad Request",
-    Details: "Bad Request"
+    // Details: "Bad Request"
   },
   "Status401Unauthorized": {
     Code: StatusCode.Status401,
     Message: "Unauthorized",
-    Details: "Unauthorized"
+    // Details: "Unauthorized"
   },
   "Status402PaymentRequired": {
     Code: StatusCode.Status402,
     Message: "Payment Required",
-    Details: "Payment Required"
+    // Details: "Payment Required"
   },
   "Status403Forbidden": {
     Code: StatusCode.Status403,
     Message: "Forbidden",
-    Details: "Forbidden"
+    // Details: "Forbidden"
   },
   "Status404NotFound": {
     Code: StatusCode.Status404,
     Message: "Not Found",
-    Details: "Not Found"
+    // Details: "Not Found"
   },
   "Status405MethodNotAllowed": {
     Code: StatusCode.Status405,
     Message: "Method Not Allowed",
-    Details: "Method Not Allowed"
+    // Details: "Method Not Allowed"
   },
   "Status406NotAcceptable": {
     Code: StatusCode.Status406,
     Message: "Not Acceptable",
-    Details: "Not Acceptable"
+    // Details: "Not Acceptable"
   },
   "Status407ProxyAuthenticationRequired": {
     Code: StatusCode.Status407,
     Message: "Proxy Authentication Required",
-    Details: "Proxy Authentication Required"
+    // Details: "Proxy Authentication Required"
   },
   "Status408RequestTimeout": {
     Code: StatusCode.Status408,
     Message: "Request Timeout",
-    Details: "Request Timeout"
+    // Details: "Request Timeout"
   },
   "Status409Conflict": {
     Code: StatusCode.Status409,
     Message: "Conflict",
-    Details: "Conflict"
+    // Details: "Conflict"
   },
   "Status410Gone": {
     Code: StatusCode.Status410,
     Message: "Gone",
-    Details: "Gone"
+    // Details: "Gone"
   },
   "Status411LengthRequired": {
     Code: StatusCode.Status411,
     Message: "Length Required",
-    Details: "Length Required"
+    // Details: "Length Required"
   },
   "Status412PreconditionFailed": {
     Code: StatusCode.Status412,
     Message: "Precondition Failed",
-    Details: "Precondition Failed"
+    // Details: "Precondition Failed"
   },
   "Status413PayloadTooLarge": {
     Code: StatusCode.Status413,
     Message: "Payload Too Large",
-    Details: "Payload Too Large"
+    // Details: "Payload Too Large"
   },
   "Status414URITooLong": {
     Code: StatusCode.Status414,
     Message: "URI Too Long",
-    Details: "URI Too Long"
+    // Details: "URI Too Long"
   },
   "Status415UnsupportedMediaType": {
     Code: StatusCode.Status415,
     Message: "Unsupported Media Type",
-    Details: "Unsupported Media Type"
+    // Details: "Unsupported Media Type"
   },
   "Status416RangeNotSatisfiable": {
     Code: StatusCode.Status416,
     Message: "Range Not Satisfiable",
-    Details: "Range Not Satisfiable"
+    // Details: "Range Not Satisfiable"
   },
   "Status417ExpectationFailed": {
     Code: StatusCode.Status417,
     Message: "Expectation Failed",
-    Details: "Expectation Failed"
+    // Details: "Expectation Failed"
   },
   "Status418ImATeapot": {
     Code: StatusCode.Status418,
     Message: "I'm a teapot",
-    Details: "I'm a teapot"
+    // Details: "I'm a teapot"
   },
   "Status421MisdirectedRequest": {
     Code: StatusCode.Status421,
     Message: "Misdirected Request",
-    Details: "Misdirected Request"
+    // Details: "Misdirected Request"
   },
   "Status422UnprocessableEntity": {
     Code: StatusCode.Status422,
     Message: "Unprocessable Entity",
-    Details: "Unprocessable Entity"
+    // Details: "Unprocessable Entity"
   },
   "Status423Locked": {
     Code: StatusCode.Status423,
     Message: "Locked",
-    Details: "Locked"
+    // Details: "Locked"
   },
   "Status424FailedDependency": {
     Code: StatusCode.Status424,
     Message: "Failed Dependency",
-    Details: "Failed Dependency"
+    // Details: "Failed Dependency"
   },
   "Status425Unnassigned": {
     Code: StatusCode.Status425,
     Message: "Unassigned",
-    Details: "Unassigned"
+    // Details: "Unassigned"
   },
   "Status426UpgradeRequired": {
     Code: StatusCode.Status426,
     Message: "Upgrade Required",
-    Details: "Upgrade Required"
+    // Details: "Upgrade Required"
   },
   "Status428PreconditionRequired": {
     Code: StatusCode.Status428,
     Message: "Precondition Required",
-    Details: "Precondition Required"
+    // Details: "Precondition Required"
   },
   "Status429TooManyRequests": {
     Code: StatusCode.Status429,
     Message: "Too Many Requests",
-    Details: "Too Many Requests"
+    // Details: "Too Many Requests"
   },
   "Status431RequestHeaderFieldsTooLarge": {
     Code: StatusCode.Status431,
     Message: "Request Header Fields Too Large",
-    Details: "Request Header Fields Too Large"
+    // Details: "Request Header Fields Too Large"
   },
   "Status451UnavailableForLegalReasons": {
     Code: StatusCode.Status451,
     Message: "Unavailable For Legal Reasons",
-    Details: "Unavailable For Legal Reasons"
+    // Details: "Unavailable For Legal Reasons"
   },
 
   "Status500InternalServerError": {

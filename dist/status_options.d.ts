@@ -1,5 +1,5 @@
-import { IBasicState207, ISource203, ISources301 } from "../interfaces/bases";
-import { Response2xxOpt, Response3xxOpt } from "../methods/options_pattern";
+import { IBasicState207, ISource203, ISources301 } from "./src/interfaces/bases";
+import { Response2xxOpt, Response3xxOpt } from "./src/methods/options_pattern";
 export declare function Status201Opt(location: string): Response2xxOpt;
 export declare function Status202Opt(requestId: string): Response2xxOpt;
 export declare function Status203Opt(source: ISource203): Response2xxOpt;

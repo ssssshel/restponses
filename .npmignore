@@ -1,2 +1,7 @@
 node_modules
 tsconfig.json
+coverage
+src
+index.ts
+status_options.ts
+index.spec.ts

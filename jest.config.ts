@@ -20,7 +20,11 @@ const config: Config.InitialOptions = {
   preset: "ts-jest",
   testEnvironment: "node",
   verbose: true,
-
+  testPathIgnorePatterns: [
+    "dist"
+  ],
+  transform: {},
+  moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
 }
 
 export default config

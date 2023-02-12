@@ -23,12 +23,14 @@ export function Response1xxInformative(statusCode: StatusCode1xx, input: BaseInp
 
   const defaultValues = defaultValuesSelector()
 
-  return {
+  const response = {
     httpStatus: statusCode,
     serverMessage: input.serverMessage || defaultValues.Message,
     detail: input.detail || defaultValues.Details,
     consultedResource: input.consultedResource
   }
+
+  return response
 }
 
 export function Response2xzSuccessfull(statusCode: StatusCode2xx, input?: BaseSuccessfullInput, statusOptions?: Response2xxOpt): GenericSuccessfullResponse {
@@ -184,7 +186,7 @@ export function Response4xxClientError(statusCode: StatusCode4xx, input?: BaseEr
   let response: GenericClientErrorResponse = {
     httpStatus: statusCode,
     serverMessage: input?.serverMessage || defaultValues.Message,
-    detail: input?.detail || defaultValues.Details,
+    // detail: input?.detail || defaultValues.Details,
     consultedResource: input?.consultedResource,
 
     errors: input?.errors,
