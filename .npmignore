@@ -1,7 +1,8 @@
 node_modules
 tsconfig.json
+tsconfig.build.json
 coverage
-src
+/src
 index.ts
 status_options.ts
 index.spec.ts

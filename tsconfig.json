@@ -16,5 +16,5 @@
   "ts-node": {"esm": true, "experimentalSpecifierResolution": "node"},
   "lib": ["esnext"],
   "include": ["."],
-  "exclude": ["./dist","node_modules"]
+  "exclude": ["./dist","node_modules", "coverage"]
 }

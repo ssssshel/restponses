@@ -1,5 +1,5 @@
-import { GenericRedirectionResponse, GenericSuccessfullResponse, IBasicState207, ISource203, ISources301 } from "./src/interfaces/bases";
-import { Response2xxOpt, Response3xxOpt } from "./src/methods/options_pattern";
+import { GenericRedirectionResponse, GenericSuccessfullResponse, IBasicState207, ISource203, ISources301 } from "../src/interfaces/bases";
+import { Response2xxOpt, Response3xxOpt } from "../src/methods/options_pattern";
 
 // 200s
 

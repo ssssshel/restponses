@@ -2,7 +2,7 @@
 import { GenericInformativeResponse } from "../interfaces/bases"
 
 import type * as MainMethods from "../../index"
-import type * as StatusOptions from "../../status_options"
+import type * as StatusOptions from "../../utils/status_options"
 const { Response1xxInformative, Response2xzSuccessfull, Response3xxRedirection, Response4xxClientError, Response5xxServerError } = jest.requireActual<typeof MainMethods>("../../index")
 const { Status300Opt } = jest.requireActual<typeof StatusOptions>("../../status_options")
 
