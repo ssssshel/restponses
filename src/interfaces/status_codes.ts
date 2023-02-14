@@ -124,11 +124,11 @@ export const defaultStatesContent: IDefaultStateContent = {
     Message: "Non-Authoritative Information",
     Details: "Non-Authoritative Information returned"
   },
-  "Status204NoContent": {
-    Code: StatusCode.Status204,
-    Message: "No Content",
-    Details: "The request has been successfully processed, but no content is returned"
-  },
+  // "Status204NoContent": {
+  //   Code: StatusCode.Status204,
+  //   Message: "No Content",
+  //   Details: "The request has been successfully processed, but no content is returned"
+  // },
   "Status205ResetContent": {
     Code: StatusCode.Status205,
     Message: "Reset Content",

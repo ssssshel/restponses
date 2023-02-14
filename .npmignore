@@ -3,6 +3,7 @@ tsconfig.json
 tsconfig.build.json
 coverage
 /src
+/utils
 index.ts
 status_options.ts
 index.spec.ts

@@ -44,8 +44,8 @@ export function Response2xzSuccessfull(statusCode: StatusCode2xx, input?: BaseSu
         return defaultStatesContent["Status202Accepted"]
       case 203:
         return defaultStatesContent["Status203NonAuthoritativeInformation"]
-      case 204:
-        return defaultStatesContent["Status204NoContent"]
+      // case 204:
+      //   return defaultStatesContent["Status204NoContent"]
       case 205:
         return defaultStatesContent["Status205ResetContent"]
       case 206:
@@ -73,6 +73,14 @@ export function Response2xzSuccessfull(statusCode: StatusCode2xx, input?: BaseSu
   }
 
   statusOptions?.(response)
+
+  if (statusCode === 201) {
+    response = {
+      httpStatus: 201,
+      error: false,
+      success: true,
+    }
+  }
 
   return response
 }
@@ -189,7 +197,11 @@ export function Response4xxClientError(statusCode: StatusCode4xx, input?: BaseEr
     // detail: input?.detail || defaultValues.Details,
     consultedResource: input?.consultedResource,
 
-    errors: input?.errors,
+    errors: input!.errors,
+    errorCode: input!.errorCode,
+    errorDescription: input!.errorDescription,
+    errorName: input!.errorName,
+
     error: true,
     success: false
   }
@@ -240,7 +252,11 @@ export function Response5xxServerError(statusCode: StatusCode5xx, input?: BaseEr
     detail: input?.detail || defaultValuesSelector().Details,
     consultedResource: input?.consultedResource,
 
-    errors: input?.errors,
+    errors: input!.errors,
+    errorCode: input!.errorCode,
+    errorDescription: input!.errorDescription,
+    errorName: input!.errorName,
+
     error: true,
     success: false
   }
