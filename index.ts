@@ -3,7 +3,12 @@ import { defaultStatesContent, HttpStatus } from "./src/interfaces/status_codes"
 import { StatusCode1xx, StatusCode2xx, StatusCode3xx, StatusCode4xx, StatusCode5xx } from "./utils/state_codes";
 import { Response2xxOpt, Response3xxOpt, Response4xxOpt } from "./src/methods/options_pattern"
 
-
+/**
+ * 
+ * @param statusCode HTTP Status Code
+ * @param input 
+ * 
+ */
 export function Response1xxInformative(statusCode: StatusCode1xx, input: BaseInput): GenericInformativeResponse {
 
   const defaultValuesSelector = (): HttpStatus => {
@@ -33,6 +38,13 @@ export function Response1xxInformative(statusCode: StatusCode1xx, input: BaseInp
   return response
 }
 
+/**
+ * 
+ * @param statusCode HTTP Status Code
+ * @param input 
+ * @param statusOptions  
+ * @returns 
+ */
 export function Response2xzSuccessfull(statusCode: StatusCode2xx, input?: BaseSuccessfullInput, statusOptions?: Response2xxOpt): GenericSuccessfullResponse {
   const defaultValuesSelector = (): HttpStatus => {
     switch (statusCode) {
@@ -74,9 +86,9 @@ export function Response2xzSuccessfull(statusCode: StatusCode2xx, input?: BaseSu
 
   statusOptions?.(response)
 
-  if (statusCode === 201) {
+  if (statusCode === 204) {
     response = {
-      httpStatus: 201,
+      httpStatus: 204,
       error: false,
       success: true,
     }
@@ -85,6 +97,13 @@ export function Response2xzSuccessfull(statusCode: StatusCode2xx, input?: BaseSu
   return response
 }
 
+/**
+ * 
+ * @param statusCode HTTP Status Code
+ * @param input 
+ * @param statusOptions 
+ * @returns 
+ */
 export function Response3xxRedirection(statusCode: StatusCode3xx, input?: BaseInput, statusOptions?: Response3xxOpt): GenericRedirectionResponse {
   const defaultValuesSelector = (): HttpStatus => {
     switch (statusCode) {
@@ -123,6 +142,13 @@ export function Response3xxRedirection(statusCode: StatusCode3xx, input?: BaseIn
   return response
 }
 
+/**
+ * 
+ * @param statusCode HTTP Status Code
+ * @param input 
+ * @param statusOptions 
+ * @returns 
+ */
 export function Response4xxClientError(statusCode: StatusCode4xx, input?: BaseErrorInput, statusOptions?: Response4xxOpt): GenericClientErrorResponse {
   const defaultValuesSelector = (): HttpStatus => {
     switch (statusCode) {
@@ -212,6 +238,12 @@ export function Response4xxClientError(statusCode: StatusCode4xx, input?: BaseEr
 
 }
 
+/**
+ * 
+ * @param statusCode HTTP Status Code
+ * @param input 
+ * @returns 
+ */
 export function Response5xxServerError(statusCode: StatusCode5xx, input?: BaseErrorInput): GenericServerErrorResponse {
   const defaultValuesSelector = (): HttpStatus => {
     switch (statusCode) {

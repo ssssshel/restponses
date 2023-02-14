@@ -201,7 +201,7 @@ export interface ClientErrorDetails {
    * 408 ONLY | Time waiting
    * @example timeWaiting: "10s"
    */
-  timeWaiting?: number
+  timeWaiting?: string
   /**
    * 409 ONLY | Resource that caused the conflict
    * @example conflictResource: "api/potato"
