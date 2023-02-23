@@ -1,6 +1,6 @@
 import { BaseErrorInput, BaseInput, BaseSuccessfullInput, GenericClientErrorResponse, GenericInformativeResponse, GenericRedirectionResponse, GenericServerErrorResponse, GenericSuccessfullResponse } from "./src/interfaces/bases";
-import { defaultStatesContent, HttpStatus } from "./src/interfaces/status_codes";
-import { StatusCode1xx, StatusCode2xx, StatusCode3xx, StatusCode4xx, StatusCode5xx } from "./utils/state_codes";
+import { defaultStatesContent, HttpStatus } from "./src/interfaces/status_codes_defaults";
+import { StatusCode1xx, StatusCode2xx, StatusCode3xx, StatusCode4xx, StatusCode5xx } from "./src/interfaces/state_codes";
 import { Response2xxOpt, Response3xxOpt, Response4xxOpt } from "./src/methods/options_pattern"
 
 /**

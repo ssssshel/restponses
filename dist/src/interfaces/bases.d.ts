@@ -1,4 +1,4 @@
-import { StatusCode1xx, StatusCode2xx, StatusCode3xx, StatusCode4xx, StatusCode5xx } from "../../utils/state_codes";
+import { StatusCode1xx, StatusCode2xx, StatusCode3xx, StatusCode4xx, StatusCode5xx } from "./state_codes";
 interface SuccessErrorProps {
     /**
      * Indicates if the request was successful

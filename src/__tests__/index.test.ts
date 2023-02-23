@@ -17,7 +17,7 @@ describe("Pruebas de metodos 100", () => {
 
 describe("Pruebas de metodos 200", () => {
   it("200", () => {
-    const response = Response2xzSuccessfull(204, {},)
+    const response = Response2xzSuccessfull(201, {}, StateOptions.Status201Opt("https://www.google.com"))
     console.log({ response })
     expect(response.httpStatus).toEqual(201)
   })
@@ -36,5 +36,13 @@ describe("Pruebas de metodos 400", () => {
     const response = Response4xxClientError(400, {})
     // console.log({ response })
     expect(response.httpStatus).toEqual(400)
+  })
+})
+
+describe("Pruebas de metodos 500", () => {
+  it("500", () => {
+    const response = Response5xxServerError(500, {})
+    // console.log({ response })
+    expect(response.httpStatus).toEqual(500)
   })
 })
