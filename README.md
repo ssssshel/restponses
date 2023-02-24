@@ -4,7 +4,7 @@
 Restponses is a library that allows you to easily generate clear and concise responses for your APIs. If your project is small, you don't have so clear your business rules, or you just don't want to worry about status codes, default messages and the nomenclature of the fields of your endpoints responses, then Restponses is for you :).
 </p>
 
-### Get Started
+## Get Started
 ---
 First you need to install the dependency.
 
@@ -91,7 +91,7 @@ The outputs would be these:
 ```
 
 
-### Base methods
+## Base methods
 ---
 As you read above, Restponses gives you five base methods to generate responses according to the status code to return.
 
@@ -103,7 +103,7 @@ As you read above, Restponses gives you five base methods to generate responses 
 | Response4xxClientError | Generates client side error responses with status codes 400 |
 | Response5xxServerError | Generates server side error responses with status codes 500 |
 
-#### Response1xxInformative()
+### Response1xxInformative()
 
 **Params:**
 <table>
@@ -117,7 +117,7 @@ As you read above, Restponses gives you five base methods to generate responses 
   </thead>
   <tbody>
     <tr>
-      <td>1. statusCode</td>
+      <td>statusCode</td>
       <td>number</td>
       <td>
         <ul>
@@ -127,7 +127,7 @@ As you read above, Restponses gives you five base methods to generate responses 
       <td>Status code of your response. * Supported: 100, 101, 102, 103</td>
     </tr>
     <tr>
-      <td>2. input</td>
+      <td>input</td>
       <td>BaseInput</td>
       <td>
       <ul>
@@ -137,7 +137,7 @@ As you read above, Restponses gives you five base methods to generate responses 
       <td>Base input object</td>
     </tr>
     <tr>
-      <td>2.1. consultedResource</td>
+      <td>input.consultedResource</td>
       <td>string</td>
       <td>
       <ul>
@@ -147,7 +147,7 @@ As you read above, Restponses gives you five base methods to generate responses 
       <td>Url or name of the resource that was consulted</td>
     </tr>
     <tr>
-      <td>2.2. detail</td>
+      <td>input.detail</td>
       <td>string</td>
       <td>
       <ul>
@@ -158,7 +158,7 @@ As you read above, Restponses gives you five base methods to generate responses 
       <td>Detail of the message that the server will send to the client</td>
     </tr>
     <tr>
-      <td>2.3. serverMessage</td>
+      <td>input.serverMessage</td>
       <td>string</td>
       <td>
       <ul>
@@ -166,7 +166,7 @@ As you read above, Restponses gives you five base methods to generate responses 
           <li>Default</li>
         </ul>
       </td>
-      <td>Message that the server will send to the client</td>
+      <td>serverMessage that the server will send to the client</td>
     </tr>
   </tbody>
 </table>
@@ -174,13 +174,42 @@ As you read above, Restponses gives you five base methods to generate responses 
 
 **Example:**
 ```javascript
-Response1xxInformative(100, { consultedResource: "potato/getPotato" })
+Response1xxInformative(statusCode: 100, input: { consultedResource: "potato/getPotato" })
 
 // Output
-  {
-    httpStatus: 100,
-    serverMessage: 'Continue',
-    detail: 'Continue with the request',
-    consultedResource: 'potato/getPotato'
-  }
+{
+  httpStatus: 100,
+  serverMessage: 'Continue',
+  detail: 'Continue with the request',
+  consultedResource: 'potato/getPotato'
+}
+```
+
+**Default values:**
+```javascript
+// Status100Continue
+{
+  httpStatus: 100,
+  serverMessage: "Continue",
+  detail:
+    "Continue with the request",
+}
+
+// Status101SwitchingProtocols
+{
+  httpStatus: StatusCode.Status101,
+  serverMessage: "Switching Protocols",
+}
+
+// Status102Processing
+{
+  httpStatus: StatusCode.Status102,
+  serverMessage: "Processing",
+}
+
+// Status103EarlyHints
+{
+  httpStatus: StatusCode.Status103,
+  serverMessage: "Checkpoint",
+}
 ```
