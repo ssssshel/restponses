@@ -9,7 +9,7 @@ import { Response2xxOpt, Response3xxOpt, Response4xxOpt } from "./src/methods/op
  * @param input 
  * 
  */
-export function Response1xxInformative(statusCode: StatusCode1xx, input: BaseInput): GenericInformativeResponse {
+export function Response1xxInformative(statusCode: StatusCode1xx, input?: BaseInput): GenericInformativeResponse {
 
   const defaultValuesSelector = (): HttpStatus => {
     switch (statusCode) {
@@ -30,9 +30,9 @@ export function Response1xxInformative(statusCode: StatusCode1xx, input: BaseInp
 
   const response = {
     httpStatus: statusCode,
-    serverMessage: input.serverMessage || defaultValues.Message,
-    detail: input.detail || defaultValues.Details,
-    consultedResource: input.consultedResource
+    serverMessage: input?.serverMessage || defaultValues.Message,
+    detail: input?.detail || defaultValues.Details,
+    consultedResource: input?.consultedResource
   }
 
   return response
@@ -45,7 +45,7 @@ export function Response1xxInformative(statusCode: StatusCode1xx, input: BaseInp
  * @param statusOptions  
  * @returns 
  */
-export function Response2xzSuccessfull(statusCode: StatusCode2xx, input?: BaseSuccessfullInput, statusOptions?: Response2xxOpt): GenericSuccessfullResponse {
+export function Response2xxSuccessful(statusCode: StatusCode2xx, input?: BaseSuccessfullInput, statusOptions?: Response2xxOpt): GenericSuccessfullResponse {
   const defaultValuesSelector = (): HttpStatus => {
     switch (statusCode) {
       case 200:
@@ -223,10 +223,10 @@ export function Response4xxClientError(statusCode: StatusCode4xx, input?: BaseEr
     // detail: input?.detail || defaultValues.Details,
     consultedResource: input?.consultedResource,
 
-    errors: input!.errors,
-    errorCode: input!.errorCode,
-    errorDescription: input!.errorDescription,
-    errorName: input!.errorName,
+    errors: input?.errors,
+    errorCode: input?.errorCode,
+    errorDescription: input?.errorDescription,
+    errorName: input?.errorName,
 
     error: true,
     success: false
@@ -284,10 +284,10 @@ export function Response5xxServerError(statusCode: StatusCode5xx, input?: BaseEr
     detail: input?.detail || defaultValuesSelector().Details,
     consultedResource: input?.consultedResource,
 
-    errors: input!.errors,
-    errorCode: input!.errorCode,
-    errorDescription: input!.errorDescription,
-    errorName: input!.errorName,
+    errors: input?.errors,
+    errorCode: input?.errorCode,
+    errorDescription: input?.errorDescription,
+    errorName: input?.errorName,
 
     error: true,
     success: false

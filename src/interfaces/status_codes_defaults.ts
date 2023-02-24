@@ -91,17 +91,17 @@ export const defaultStatesContent: IDefaultStateContent = {
   "Status101SwitchingProtocols": {
     Code: StatusCode.Status101,
     Message: "Switching Protocols",
-    Details: ""
+    // Details: ""
   },
   "Status102Processing": {
     Code: StatusCode.Status102,
     Message: "Processing",
-    Details: ""
+    // Details: ""
   },
   "Status103EarlyHints": {
     Code: StatusCode.Status103,
     Message: "Checkpoint",
-    Details: ""
+    // Details: ""
   },
 
   "Status200OK": {
@@ -345,66 +345,66 @@ export const defaultStatesContent: IDefaultStateContent = {
   "Status500InternalServerError": {
     Code: StatusCode.Status500,
     Message: "Internal Server Error",
-    Details: "Internal Server Error"
+    // Details: "Internal Server Error"
   },
   "Status501NotImplemented": {
     Code: StatusCode.Status501,
     Message: "Not Implemented",
-    Details: "Not Implemented"
+    // Details: "Not Implemented"
   },
   "Status502BadGateway": {
     Code: StatusCode.Status502,
     Message: "Bad Gateway",
-    Details: "Bad Gateway"
+    // Details: "Bad Gateway"
   },
   "Status503ServiceUnavailable": {
     Code: StatusCode.Status503,
     Message: "Service Unavailable",
-    Details: "Service Unavailable"
+    // Details: "Service Unavailable"
   },
   "Status504GatewayTimeout": {
     Code: StatusCode.Status504,
     Message: "Gateway Timeout",
-    Details: "Gateway Timeout"
+    // Details: "Gateway Timeout"
   },
   "Status505HTTPVersionNotSupported": {
     Code: StatusCode.Status505,
     Message: "HTTP Version Not Supported",
-    Details: "HTTP Version Not Supported"
+    // Details: "HTTP Version Not Supported"
   },
   "Status506VariantAlsoNegotiates": {
     Code: StatusCode.Status506,
     Message: "Variant Also Negotiates",
-    Details: "Variant Also Negotiates"
+    // Details: "Variant Also Negotiates"
   },
   "Status507InsufficientStorage": {
     Code: StatusCode.Status507,
     Message: "Insufficient Storage",
-    Details: "Insufficient Storage"
+    // Details: "Insufficient Storage"
   },
   "Status508LoopDetected": {
     Code: StatusCode.Status508,
     Message: "Loop Detected",
-    Details: "Loop Detected"
+    // Details: "Loop Detected"
   },
   "Status509BandwithLimitExceeded": {
     Code: StatusCode.Status509,
     Message: "Bandwith Limit Exceeded",
-    Details: "Bandwith Limit Exceeded"
+    // Details: "Bandwith Limit Exceeded"
   },
   "Status510NotExtended": {
     Code: StatusCode.Status510,
     Message: "Not Extended",
-    Details: "Not Extended"
+    // Details: "Not Extended"
   },
   "Status511NetworkAuthenticationRequired": {
     Code: StatusCode.Status511,
     Message: "Network Authentication Required",
-    Details: "Network Authentication Required"
+    // Details: "Network Authentication Required"
   },
   "Status521WebServerIsDown": {
     Code: StatusCode.Status521,
     Message: "Web Server Is Down",
-    Details: "Web Server Is Down"
+    // Details: "Web Server Is Down"
   }
 };
