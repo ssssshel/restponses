@@ -17,7 +17,7 @@ describe("Pruebas de metodos 100", () => {
 
 describe("Pruebas de metodos 200", () => {
   it("200", () => {
-    const response = Response2xxSuccessful(200)
+    const response = Response2xxSuccessful(200, {},)
     console.log({ response })
     expect(response.httpStatus).toEqual(201)
   })
@@ -25,7 +25,7 @@ describe("Pruebas de metodos 200", () => {
 
 describe("Pruebas de metodos 300", () => {
   it("300", () => {
-    const response = Response3xxRedirection(301, {}, StateOptions.Status301Opt({ newSource: "https://www.google.com", oldSource: "https://www.google.com" }))
+    const response = Response3xxRedirection(309, {}, StateOptions.Status301Opt({ newSource: "https://www.google.com", oldSource: "https://www.google.com" }))
     console.log({ response })
     expect(response.httpStatus).toEqual(301)
   })

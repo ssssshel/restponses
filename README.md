@@ -105,7 +105,7 @@ As you read above, Restponses gives you five base methods to generate responses 
 
 ### Response1xxInformative()
 
-**Params:**
+#### Params:
 <table>
   <thead>
     <tr>
@@ -172,7 +172,7 @@ As you read above, Restponses gives you five base methods to generate responses 
 </table>
 
 
-**Example:**
+#### Example:
 ```javascript
 Response1xxInformative(statusCode: 100, input: { consultedResource: "potato/getPotato" })
 
@@ -185,7 +185,7 @@ Response1xxInformative(statusCode: 100, input: { consultedResource: "potato/getP
 }
 ```
 
-**Default values:**
+#### Default responses:
 ```javascript
 // Status100Continue
 {
@@ -197,19 +197,262 @@ Response1xxInformative(statusCode: 100, input: { consultedResource: "potato/getP
 
 // Status101SwitchingProtocols
 {
-  httpStatus: StatusCode.Status101,
+  httpStatus: 101,
   serverMessage: "Switching Protocols",
 }
 
 // Status102Processing
 {
-  httpStatus: StatusCode.Status102,
+  httpStatus: 102,
   serverMessage: "Processing",
 }
 
 // Status103EarlyHints
 {
-  httpStatus: StatusCode.Status103,
+  httpStatus: 103,
   serverMessage: "Checkpoint",
 }
 ```
+
+### Response2xxSuccessful()
+
+#### Params:
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Attribute</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>statusCode</td>
+      <td>number</td>
+      <td>
+        <ul>
+          <li>Mandatory</li>
+        </ul>
+      </td>
+      <td>Status code of your response. *Supported: 200, 201, 202, 203, 204, 205, 206, 207, 208, 226</td>
+    </tr>
+    <tr>
+      <td>input</td>
+      <td>BaseSuccessfulInput</td>
+      <td>
+        <ul>
+          <li>Optional</li>
+        </ul>
+      </td>
+      <td>Base successful input object</td>
+    </tr>
+    <tr>
+      <td>input.consultedResource</td>
+      <td>string</td>
+      <td>
+        <ul>
+          <li>Optional</li>
+        </ul>
+      </td>
+      <td>URl or name of the consulted resource</td>
+    </tr>
+    <tr>
+      <td>input.data</td>
+      <td>any</td>
+      <td>
+        <ul>
+          <li>Optional</li>
+        </ul>
+      </td>
+      <td>Data that the server will send to the client</td>
+    </tr>
+    <tr>
+      <td>input.detail</td>
+      <td>string</td>
+      <td>
+        <ul>
+          <li>Optional</li>
+          <li>Default</li>
+        </ul>
+      </td>
+      <td>Detail of the message</td>
+    </tr>
+    <tr>
+      <td>input.serverMessage</td>
+      <td>string</td>
+      <td>
+        <ul>
+          <li>Optional</li>
+          <li>Default</li>
+        </ul>
+      </td>
+      <td>Message that the server will send to the client</td>
+    </tr>
+    <tr>
+      <td>statusOptions</td>
+      <td>Response2xxOpt</td>
+      <td>
+        <ul>
+          <li>Optional
+          </li>
+        </ul>
+      </td>
+      <td>Methods that you could use to add specific fields in your response related to the status code</td>
+    </tr>
+  </tbody>
+</table>
+
+#### Example:
+
+#### Default responses:
+
+#### Status options:
+
+### Response3xxRedirection()
+
+#### Params:
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Attribute</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>statusCode</td>
+      <td>number</td>
+      <td>
+      <ul>
+          <li>Mandatory</li>
+      </ul>
+      </td>
+      <td>Status code of your response. *Supported: 300, 301, 302, 303, 304, 305, 307, 308</td>
+    </tr> 
+    <tr>
+      <td>input</td>
+      <td>BaseInput</td>
+      <td>
+      <ul>
+          <li>Optinal</li>
+      </ul>
+      </td>
+      <td>Base input object</td>
+    </tr> 
+    <tr>
+      <td>input.consultedResource</td>
+      <td>string</td>
+      <td>
+      <ul>
+          <li>Optional</li>
+      </ul>
+      </td>
+      <td>URL or name of the resource that was consulted</td>
+    </tr> 
+    <tr>
+      <td>input.detail</td>
+      <td>string</td>
+      <td>
+      <ul>
+          <li>Optional</li>
+      </ul>
+      </td>
+      <td>Detail of the message</td>
+    </tr> 
+    <tr>
+      <td>input.serverMessage</td>
+      <td>string</td>
+      <td>
+      <ul>
+          <li>Optional</li>
+          <li>Default</li>
+      </ul>
+      </td>
+      <td>Message that the server will send to the client</td>
+    </tr> 
+    <tr>
+      <td>statusOptions</td>
+      <td>Response3xxOpt</td>
+      <td>
+      <ul>
+          <li>Optional</li>
+      </ul>
+      </td>
+      <td>Methods that you could use to add specific fields in your response related to the status code</td>
+    </tr> 
+  </tbody>
+</table>
+
+#### Example:
+
+#### Default responses:
+
+#### Status options:
+
+### Response4xxClientError()
+
+#### Params:
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Attribute</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td></td>
+      <td></td>
+      <td>
+      <ul>
+          <li></li>
+      </ul>
+      </td>
+      <td></td>
+    </tr> 
+  </tbody>
+</table>
+
+#### Example:
+
+#### Default responses:
+
+#### Status options:
+
+### Response5xxServerError()
+
+#### Params:
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Attribute</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td></td>
+      <td></td>
+      <td>
+      <ul>
+          <li></li>
+      </ul>
+      </td>
+      <td></td>
+    </tr> 
+  </tbody>
+</table>
+
+#### Example:
+
+#### Default responses:

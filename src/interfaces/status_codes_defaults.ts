@@ -30,7 +30,7 @@ enum StatusCode {
   Status304 = 304,
   Status305 = 305,
   Status307 = 307,
-  Status308 = 309,
+  Status308 = 308,
 
   Status400 = 400,
   Status401 = 401,
@@ -158,42 +158,42 @@ export const defaultStatesContent: IDefaultStateContent = {
   "Status300MultipleChoices": {
     Code: StatusCode.Status300,
     Message: "Multiple Choices",
-    Details: "Multiple Choices"
+    // Details: "Multiple Choices"
   },
   "Status301MovedPermanently": {
     Code: StatusCode.Status301,
     Message: "Moved Permanently",
-    Details: "Moved Permanently"
+    // Details: "Moved Permanently"
   },
   "Status302Found": {
     Code: StatusCode.Status302,
     Message: "Found",
-    Details: "Found"
+    // Details: "Found"
   },
   "Status303SeeOther": {
     Code: StatusCode.Status303,
     Message: "See Other",
-    Details: "See Other"
+    // Details: "See Other"
   },
   "Status304NotModified": {
     Code: StatusCode.Status304,
     Message: "Not Modified",
-    Details: "Not Modified"
+    // Details: "Not Modified"
   },
   "Status305UseProxy": {
     Code: StatusCode.Status305,
     Message: "Use Proxy",
-    Details: "Use Proxy"
+    // Details: "Use Proxy"
   },
   "Status307TemporaryRedirect": {
     Code: StatusCode.Status307,
     Message: "Temporary Redirect",
-    Details: "Temporary Redirect"
+    // Details: "Temporary Redirect"
   },
   "Status308PermanentRedirect": {
     Code: StatusCode.Status308,
     Message: "Permanent Redirect",
-    Details: "Permanent Redirect"
+    // Details: "Permanent Redirect"
   },
 
   "Status400BadRequest": {
