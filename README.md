@@ -83,17 +83,88 @@ The outputs would be these:
   {
     httpStatus: 500,
     serverMessage: 'Internal Server Error',
-    detail: 'Internal Server Error',
     error: true,
     success: false
   }
 
 ```
 
+### Input parameter
+
+You can also overwrite the fields *serverMessage* and *detail* with custom information using the second parameter: **input**. You can even add information about the consulted resource, data obtained or details of errors in the same way:
+
+```javascript
+Response1xxInformative(100, { consultedResource: "/getPotato", serverMessage: "/getPotato consulted", detail: "please continue"})
+
+  //Output
+  {
+    httpStatus: 100,
+    serverMessage: '/getPotato consulted',
+    detail: 'please continue',
+    consultedResource: '/getPotato'
+  }
+
+
+Response2xxSuccessful(200, { consultedResource: "/getPotato", data: dbResponse, serverMessage: "Potato was found", detail: "now you can eat potato" })
+
+  // Output
+  {
+    httpStatus: 200,
+    serverMessage: 'Potato was found',
+    data: {
+      id: 45322,
+      name: "Yellow potato",
+      country: "Peru"
+    }
+    detail: 'now you can eat potato',
+    consultedResource: '/getPotato',
+    success: true,
+    error: false
+  }
+
+  Response3xxRedirection(300, { consultedResource: "/getPotato", detail: "Potato was found, but you can't eat it now", serverMessage: "Potato was found, now choose one" })
+
+  // Output
+  {
+    httpStatus: 300,
+    serverMessage: 'Potato was found, now choose one',
+    detail: "Potato was found, but you can't eat it now",
+    consultedResource: '/getPotato'
+  }
+
+  Response4xxClientError(404, { consultedResource: "/getPotato", detail: "Potato was not found", serverMessage: "Potato was not found", errorCode: "404NOTFOUND", errorName: "PotatoNotFound", errorDescription: "Your resource was not found" })
+  
+  // Output
+  {
+    httpStatus: 404,
+    serverMessage: 'Potato was not found',
+    consultedResource: '/getPotato',
+    errors: undefined,
+    errorCode: '404NOTFOUND',
+    errorName: 'PotatoNotFound',
+    errorDescription:'Your resource was not found',
+    error: true,
+    success: false
+  }
+
+  Response5xxServerError(500, { consultedResource: "/getPotato", serverMessage: "Potato was not found due to a server error", errorCode: "500SERVERERROR", errorName: "INTERNAL_SERVER_ERROR" })
+
+  // Output
+  {
+    httpStatus: 500,
+    serverMessage: 'Potato was not found due to a server error',
+    consultedResource: '/getPotato',
+    errorCode: '500SERVERERROR',
+    errorName: 'INTERNAL_SERVER_ERROR',
+    error: true,
+    success: false
+  }
+
+```
 
 ## Base methods
 ---
-As you read above, Restponses gives you five base methods to generate responses according to the status code to return.
+As you read above, Restponses gives you five base methods to generate responses according to the status code to return:
 
 | Method | Description |
 |-|-|
@@ -155,7 +226,7 @@ As you read above, Restponses gives you five base methods to generate responses 
           <li>Default (only 100)</li>
         </ul>
       </td>
-      <td>Detail of the message that the server will send to the client</td>
+      <td>Detail of the response</td>
     </tr>
     <tr>
       <td>input.serverMessage</td>
@@ -276,7 +347,7 @@ Response1xxInformative(statusCode: 100, input: { consultedResource: "potato/getP
           <li>Default</li>
         </ul>
       </td>
-      <td>Detail of the message</td>
+      <td>Detail of the response</td>
     </tr>
     <tr>
       <td>input.serverMessage</td>
@@ -338,7 +409,7 @@ Response1xxInformative(statusCode: 100, input: { consultedResource: "potato/getP
       <td>BaseInput</td>
       <td>
       <ul>
-          <li>Optinal</li>
+          <li>Optional</li>
       </ul>
       </td>
       <td>Base input object</td>
@@ -361,7 +432,7 @@ Response1xxInformative(statusCode: 100, input: { consultedResource: "potato/getP
           <li>Optional</li>
       </ul>
       </td>
-      <td>Detail of the message</td>
+      <td>Detail of the response</td>
     </tr> 
     <tr>
       <td>input.serverMessage</td>
@@ -408,14 +479,105 @@ Response1xxInformative(statusCode: 100, input: { consultedResource: "potato/getP
   </thead>
   <tbody>
     <tr>
-      <td></td>
-      <td></td>
+      <td>statusCode</td>
+      <td>number</td>
       <td>
       <ul>
-          <li></li>
+          <li>Mandatory</li>
       </ul>
       </td>
-      <td></td>
+      <td>Status code of your response. *Supported: 400, 401, 402, 403, 404, 405, 406, 407, 408, 409, 410, 411, 412, 413, 414, 415, 416, 417, 418, 421, 422, 423, 424, 425, 426, 428, 429, 431, 451</td>
+    </tr> 
+    <tr>
+      <td>input</td>
+      <td>BaseErrorInput</td>
+      <td>
+      <ul>
+          <li>Optional</li>
+      </ul>
+      </td>
+      <td>Base error input object</td>
+    </tr> 
+    <tr>
+      <td>input.consultedResource</td>
+      <td>string</td>
+      <td>
+      <ul>
+          <li>Optional</li>
+      </ul>
+      </td>
+      <td>URL or name of the resource that was consulted</td>
+    </tr> 
+    <tr>
+      <td>input.detail</td>
+      <td>string</td>
+      <td>
+      <ul>
+          <li>Optional</li>
+      </ul>
+      </td>
+      <td>Detail of the response</td>
+    </tr> 
+    <tr>
+      <td>input.serverMessage</td>
+      <td>string</td>
+      <td>
+      <ul>
+          <li>Optional</li>
+          <li>Default</li>
+      </ul>
+      </td>
+      <td>Message that the server will send to the client</td>
+    </tr> 
+    <tr>
+      <td>input.errorCode</td>
+      <td>string</td>
+      <td>
+      <ul>
+          <li>Optional</li>
+      </ul>
+      </td>
+      <td>Error identifier code</td>
+    </tr> 
+    <tr>
+      <td>input.errorDescription</td>
+      <td>string</td>
+      <td>
+      <ul>
+          <li>Optional</li>
+      </ul>
+      </td>
+      <td>Error description</td>
+    </tr> 
+    <tr>
+      <td>input.errorName</td>
+      <td>string</td>
+      <td>
+      <ul>
+          <li>Optional</li>
+      </ul>
+      </td>
+      <td>Error name</td>
+    </tr> 
+    <tr>
+      <td>input.errors</td>
+      <td>any</td>
+      <td>
+      <ul>
+          <li>Optional</li>
+      </ul>
+      </td>
+      <td>Arbitrary errors you can add to your response</td>
+    </tr> 
+    <tr>
+      <td>statusOptions</td>
+      <td>Response4xxOpt</td>
+      <td>
+      <ul>
+          <li>Optional</li>
+      </ul>
+      </td>
+      <td>Methods that you could use to add specific fields in your response related to the status code</td>
     </tr> 
   </tbody>
 </table>
@@ -441,14 +603,95 @@ Response1xxInformative(statusCode: 100, input: { consultedResource: "potato/getP
   </thead>
   <tbody>
     <tr>
-      <td></td>
-      <td></td>
+      <td>statusCode</td>
+      <td>number</td>
       <td>
       <ul>
-          <li></li>
+          <li>Mandatory</li>
       </ul>
       </td>
-      <td></td>
+      <td>Status code of your response. *Supported: 500, 501, 502, 503, 504, 505, 506, 507, 508, 509, 510, 511, 521</td>
+    </tr> 
+    <tr>
+      <td>input</td>
+      <td>BaseErrorInput</td>
+      <td>
+      <ul>
+          <li>Optional</li>
+      </ul>
+      </td>
+      <td>Base error input object</td>
+    </tr> 
+    <tr>
+      <td>input.consultedResource</td>
+      <td>string</td>
+      <td>
+      <ul>
+          <li>Optional</li>
+      </ul>
+      </td>
+      <td>URL or name of the consulted resource</td>
+    </tr> 
+    <tr>
+      <td>input.detail</td>
+      <td>string</td>
+      <td>
+      <ul>
+          <li>Optional</li>
+      </ul>
+      </td>
+      <td>Detail of the response</td>
+    </tr> 
+    <tr>
+      <td>input.serverMessage</td>
+      <td>string</td>
+      <td>
+      <ul>
+          <li>Optional</li>
+          <li>Default</li>
+      </ul>
+      </td>
+      <td>Message that the server will send to the client</td>
+    </tr> 
+    <tr>
+      <td>input.errorCode</td>
+      <td>string</td>
+      <td>
+      <ul>
+          <li>Optional</li>
+      </ul>
+      </td>
+      <td>Error identifier code</td>
+    </tr> 
+    <tr>
+      <td>input.errorDescription</td>
+      <td>string</td>
+      <td>
+      <ul>
+          <li>Optional</li>
+      </ul>
+      </td>
+      <td>Error description</td>
+    </tr> 
+    <tr>
+      <td>input.errorName</td>
+      <td>string</td>
+      <td>
+      <ul>
+          <li>Optional</li>
+      </ul>
+      </td>
+      <td>Error name</td>
+    </tr> 
+    <tr>
+      <td>input.errors</td>
+      <td>any</td>
+      <td>
+      <ul>
+          <li>Optional</li>
+      </ul>
+      </td>
+      <td>Arbitrary errors you can add to your response</td>
     </tr> 
   </tbody>
 </table>

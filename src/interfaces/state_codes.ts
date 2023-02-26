@@ -1,21 +1,21 @@
 export enum StatusCode1xx {
-  Status100 = 100,
-  Status101 = 101,
-  Status102 = 102,
-  Status103 = 103,
+  Status100 = 100, // Continue
+  Status101 = 101, // Switching Protocols
+  Status102 = 102, // Processing
+  Status103 = 103, // Early Hints
 }
 
 export enum StatusCode2xx {
-  Status200 = 200,
-  Status201 = 201,
-  Status202 = 202,
-  Status203 = 203,
-  Status204 = 204,
-  Status205 = 205,
-  Status206 = 206,
-  Status207 = 207,
-  Status208 = 208,
-  Status226 = 226,
+  Status200 = 200, // OK
+  Status201 = 201, // Created
+  Status202 = 202, // Accepted
+  Status203 = 203, // Non-Authoritative Information
+  Status204 = 204, // No Content
+  Status205 = 205, // Reset Content
+  Status206 = 206, // Partial Content
+  Status207 = 207, // Multi-Status
+  Status208 = 208, // Already Reported
+  Status226 = 226, // IM Used
 }
 
 export enum StatusCode3xx {

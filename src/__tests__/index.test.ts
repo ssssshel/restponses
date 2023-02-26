@@ -9,7 +9,7 @@ const { StateOptions } = jest.requireActual<typeof Options>("../../utils/status_
 
 describe("Pruebas de metodos 100", () => {
   it("100", () => {
-    const response = Response1xxInformative(101, { consultedResource: "potato/getPotato" })
+    const response = Response1xxInformative(100, { consultedResource: "/getPotato", serverMessage: "Potato was found", detail: "eat potato" })
     console.log({ response })
     expect(response.httpStatus).toEqual(100)
   })
@@ -17,15 +17,15 @@ describe("Pruebas de metodos 100", () => {
 
 describe("Pruebas de metodos 200", () => {
   it("200", () => {
-    const response = Response2xxSuccessful(200, {},)
+    const response = Response2xxSuccessful(200, { consultedResource: "/getPotato", serverMessage: "Potato was found", detail: "you can eat potato now" })
     console.log({ response })
-    expect(response.httpStatus).toEqual(201)
+    expect(response.httpStatus).toEqual(200)
   })
 })
 
 describe("Pruebas de metodos 300", () => {
   it("300", () => {
-    const response = Response3xxRedirection(309, {}, StateOptions.Status301Opt({ newSource: "https://www.google.com", oldSource: "https://www.google.com" }))
+    const response = Response3xxRedirection(300, { consultedResource: "/getPotato", detail: "Potato was found, but you can't eat it now", serverMessage: "Potato was found, now choose one" })
     console.log({ response })
     expect(response.httpStatus).toEqual(301)
   })
@@ -33,7 +33,7 @@ describe("Pruebas de metodos 300", () => {
 
 describe("Pruebas de metodos 400", () => {
   it("400", () => {
-    const response = Response4xxClientError(400)
+    const response = Response4xxClientError(404, { consultedResource: "/getPotato", detail: "Potato was not found", serverMessage: "Potato was not found", errorCode: "404NOTFOUND", errorName: "PotatoNotFound" })
     console.log({ response })
     expect(response.httpStatus).toEqual(400)
   })
@@ -41,7 +41,7 @@ describe("Pruebas de metodos 400", () => {
 
 describe("Pruebas de metodos 500", () => {
   it("500", () => {
-    const response = Response5xxServerError(500)
+    const response = Response5xxServerError(500, { consultedResource: "/getPotato", serverMessage: "Potato was not found due to a server error", errorCode: "500SERVERERROR", errorName: "INTERNAL_SERVER_ERROR" })
     console.log({ response })
     expect(response.httpStatus).toEqual(500)
   })
