@@ -1,6 +1,6 @@
 import { IBasicState207, ISource203, ISources301 } from "../src/interfaces/bases";
 import { Response2xxOpt, Response3xxOpt, Response4xxOpt } from "../src/methods/options_pattern";
-export declare class StateOptions {
+export declare class StatusOptions {
     /**
      *
      * @param location Location of the resource created
@@ -88,7 +88,7 @@ export declare class StateOptions {
     /**
      *
      * @param authenticationType Type of authentication
-     * @param realm Realm of authentication
+     * @param realm Realm or domain of authentication
      * @example authenticationType: "Basic", realm: "Example"
      */
     static Status407Opt(authenticationType: string, realm: string): Response4xxOpt;

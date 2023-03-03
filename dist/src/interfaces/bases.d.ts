@@ -148,7 +148,7 @@ export interface GenericClientErrorResponse extends BaseErrorInput, SuccessError
     /**
      *  Client error details
      */
-    errorDetails?: ClientErrorDetails;
+    errorDetails: ClientErrorDetails;
 }
 export interface ClientErrorDetails {
     /**

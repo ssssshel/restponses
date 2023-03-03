@@ -1,7 +1,7 @@
 import { GenericClientErrorResponse, GenericRedirectionResponse, GenericSuccessfullResponse, IBasicState207, ISource203, ISources301 } from "../src/interfaces/bases";
 import { Response2xxOpt, Response3xxOpt, Response4xxOpt } from "../src/methods/options_pattern";
 
-export class StateOptions {
+export class StatusOptions {
   // 200s
   /**
    * 
@@ -135,7 +135,7 @@ export class StateOptions {
    */
   static Status404Opt(notFoundResource: string): Response4xxOpt {
     return function (props: GenericClientErrorResponse) {
-      return props.errorDetails!.notFoundResource = notFoundResource
+      return props.errorDetails.notFoundResource = notFoundResource
     }
   }
 
@@ -146,7 +146,7 @@ export class StateOptions {
    */
   static Status405Opt(allowedMethods: string[]): Response4xxOpt {
     return function (props: GenericClientErrorResponse) {
-      return props.errorDetails!.allowedMethods = allowedMethods
+      return props.errorDetails.allowedMethods = allowedMethods
     }
   }
 
@@ -157,19 +157,19 @@ export class StateOptions {
    */
   static Status406Opt(allowedRepresentations: string[]): Response4xxOpt {
     return function (props: GenericClientErrorResponse) {
-      return props.errorDetails!.allowedRepresentations = allowedRepresentations
+      return props.errorDetails.allowedRepresentations = allowedRepresentations
     }
   }
 
   /**
    * 
    * @param authenticationType Type of authentication
-   * @param realm Realm of authentication
+   * @param realm Realm or domain of authentication
    * @example authenticationType: "Basic", realm: "Example"
    */
   static Status407Opt(authenticationType: string, realm: string): Response4xxOpt {
     return function (props: GenericClientErrorResponse) {
-      return props.errorDetails!.authenticationType = authenticationType, props.errorDetails!.realm = realm
+      return props.errorDetails.authenticationType = authenticationType, props.errorDetails!.realm = realm
     }
   }
 
@@ -180,7 +180,7 @@ export class StateOptions {
    */
   static Status408Opt(timeWaiting: string): Response4xxOpt {
     return function (props: GenericClientErrorResponse) {
-      return props.errorDetails!.timeWaiting = timeWaiting
+      return props.errorDetails.timeWaiting = timeWaiting
     }
   }
 
@@ -192,7 +192,7 @@ export class StateOptions {
    */
   static Status409Opt(conflictResource: string, conflictId: string): Response4xxOpt {
     return function (props: GenericClientErrorResponse) {
-      return props.errorDetails!.conflictResource = conflictResource, props.errorDetails!.conflictId = conflictId
+      return props.errorDetails.conflictResource = conflictResource, props.errorDetails!.conflictId = conflictId
     }
   }
 
@@ -204,7 +204,7 @@ export class StateOptions {
    */
   static Status410Opt(goneResource: string, reason: string): Response4xxOpt {
     return function (props: GenericClientErrorResponse) {
-      return props.errorDetails!.goneResource = goneResource, props.errorDetails!.reason = reason
+      return props.errorDetails.goneResource = goneResource, props.errorDetails!.reason = reason
     }
   }
 
@@ -214,7 +214,7 @@ export class StateOptions {
    */
   static Status411Opt(): Response4xxOpt {
     return function (props: GenericClientErrorResponse) {
-      return props.errorDetails!.requiredHeader = "Content-Length"
+      return props.errorDetails.requiredHeader = "Content-Length"
     }
   }
 
@@ -225,7 +225,7 @@ export class StateOptions {
    */
   static Status413Opt(maxAllowedSize: string): Response4xxOpt {
     return function (props: GenericClientErrorResponse) {
-      return props.errorDetails!.maxAllowedSize = maxAllowedSize
+      return props.errorDetails.maxAllowedSize = maxAllowedSize
     }
   }
 
@@ -236,7 +236,7 @@ export class StateOptions {
    */
   static Status414Opt(maxAllowedLength: string): Response4xxOpt {
     return function (props: GenericClientErrorResponse) {
-      return props.errorDetails!.maxAllowedLength = maxAllowedLength
+      return props.errorDetails.maxAllowedLength = maxAllowedLength
     }
   }
 
@@ -247,7 +247,7 @@ export class StateOptions {
    */
   static Status415Opt(supportedMediaTypes: string[]): Response4xxOpt {
     return function (props: GenericClientErrorResponse) {
-      return props.errorDetails!.supportedMediaTypes = supportedMediaTypes
+      return props.errorDetails.supportedMediaTypes = supportedMediaTypes
     }
   }
 
@@ -259,7 +259,7 @@ export class StateOptions {
    */
   static Status416Opt(requestedContentRange: string, supportedContentRange: string): Response4xxOpt {
     return function (props: GenericClientErrorResponse) {
-      return props.errorDetails!.requestedContentRange = requestedContentRange, props.errorDetails!.supportedContentRange = supportedContentRange
+      return props.errorDetails.requestedContentRange = requestedContentRange, props.errorDetails!.supportedContentRange = supportedContentRange
     }
   }
 
@@ -270,7 +270,7 @@ export class StateOptions {
    */
   static Status423Opt(lockedResource: string): Response4xxOpt {
     return function (props: GenericClientErrorResponse) {
-      return props.errorDetails!.lockedResource = lockedResource
+      return props.errorDetails.lockedResource = lockedResource
     }
   }
 
@@ -281,7 +281,7 @@ export class StateOptions {
    */
   static Status424Opt(failedDependency: string): Response4xxOpt {
     return function (props: GenericClientErrorResponse) {
-      return props.errorDetails!.failedDependency = failedDependency
+      return props.errorDetails.failedDependency = failedDependency
     }
   }
 }

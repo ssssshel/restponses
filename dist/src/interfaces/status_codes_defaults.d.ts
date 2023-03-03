@@ -25,7 +25,7 @@ declare enum StatusCode {
     Status304 = 304,
     Status305 = 305,
     Status307 = 307,
-    Status308 = 309,
+    Status308 = 308,
     Status400 = 400,
     Status401 = 401,
     Status402 = 402,

@@ -10,7 +10,7 @@ First you need to install the dependency.
 
 `npm install restponses`
 
-Restponses has been developed totally with typescript, so you don't have to worry about installing any @types dependencies
+Restponses has been developed totally with typescript, so you don't have to worry about installing any @types dependencies.
 
 Then you will need to import the base methods to generate your response, you have five options for five status codes types:
 
@@ -30,20 +30,20 @@ The most simpliest way to use these methods is entering the only mandatory param
   app.get("/potatoes/:id", (req, res) => {
     const {id} = req.params
     if(!id){
-      //Example 1
+      //Example 1 (400BadRequest)
       return res.json(Response4xxClientError(400))
     }
     try {
       const potato = dbGetPotato(id)
       if(!potato){
-        // Example 2
+        // Example 2 (404NotFound)
         return res.json(Response4xxClientError(404))
       }else{
-        // Example 3
+        // Example 3 (200Ok)
         return res.json(Response2xxSuccessful(200))
       }
     } catch (error) {
-      // Example 4
+      // Example 4 (500InternalServerError)
       return res.json(Responses5xxServerError(500))
     }
   })
@@ -162,6 +162,27 @@ Response2xxSuccessful(200, { consultedResource: "/getPotato", data: dbResponse, 
 
 ```
 
+### StatusOptions parameter
+
+The third and last parameter, statusOptions params allows you introduce specific field/s related to the status code of your response. For example, if you want to add the url where is your created resource (201), or the not found URL or resource (404), you can simply use the corresponding StatusOption method. You just have to import the class and access the desired method:
+
+```javascript
+import { StatusOptions } from "restponses/dist/utils/status_options"
+
+Response2xxSuccessful(201, { consultedResource: "/createPotato", serverMessage: "Potato created" }, StatusOptions.Status201Opt("https://potato.api/34"))
+
+//Output
+  {
+    httpStatus: 201,
+    serverMessage: 'Potato created',
+    detail: 'Resource successfully created',
+    consultedResource: '/createPotato',
+    success: true,
+    error: false,
+    location: 'https://potato.api/34'
+  }
+```
+
 ## Base methods
 ---
 As you read above, Restponses gives you five base methods to generate responses according to the status code to return:
@@ -257,6 +278,7 @@ Response1xxInformative(statusCode: 100, input: { consultedResource: "potato/getP
 ```
 
 #### Default responses:
+
 ```javascript
 // Status100Continue
 {
@@ -376,9 +398,150 @@ Response1xxInformative(statusCode: 100, input: { consultedResource: "potato/getP
 
 #### Example:
 
+> Output includes *success* and *error* fields by default.
+
+```javascript
+Response2xxSuccessful(200, { consultedResource: "/getPotato" })
+
+// Output
+{
+  httpStatus: 200,
+  serverMessage: 'OK',
+  detail: 'The request has been successfully processed',
+  consultedResource: '/getPotato',
+  success: true,
+  error: false
+}
+```
+
 #### Default responses:
 
+```javascript
+
+  // Status200OK
+  {
+    httpStatus: 200,
+    serverMessage: "OK",
+    detail: "The request has been successfully processed"
+  }
+
+  // Status201Created
+  {
+    httpStatus: 201,
+    serverMessage: "Created",
+    detail: "Resource successfully created"
+  }
+
+  // Status202Accepted
+  {
+    httpStatus: 202,
+    serverMessage: "Accepted",
+    detail: "The request has been accepted for processing"
+  }
+
+  // Status203NonAuthoritativeInformation
+  {
+    httpStatus: 203,
+    serverMessage: "Non-Authoritative Information",
+    detail: "Non-Authoritative Information returned"
+  }
+
+  // Status204NoContent
+  {
+    httpStatus: 204
+  }
+
+  // Status205ResetContent
+  {
+    httpStatus: 205,
+    serverMessage: "Reset Content",
+    detail: "The request has been successfully processed, but no content is returned"
+  }
+
+  // Status206PartialContent
+  {
+    httpStatus: 206,
+    serverMessage: "Partial Content",
+    detail: "Partial Content returned"
+  }
+
+  // Status207MultiStatus
+  {
+    httpStatus: 207,
+    serverMessage: "Multi-Status",
+    detail: "Multi-Status returned"
+  }
+
+  // Status208AlreadyReported
+  {
+    httpStatus: 208,
+    serverMessage: "Already Reported",
+    detail: "Resource already reported"
+  }
+
+  // Status226IMUsed
+  {
+    httpStatus: 226,
+    serverMessage: "IM Used",
+    detail: "IM Used"
+  }
+```
+
 #### Status options:
+
+<table>
+ <thead>
+  <tr>
+    <th>Method</th>
+    <th>Params</th>
+    <th>Description</th>
+  </tr>
+ </thead>
+ <tbody>
+  <tr>
+    <td>Status201Opt</td>
+    <td>
+      <ul>
+        <li>location: string</li>
+      </ul>
+    </td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Status202Opt</td>
+    <td>
+      <ul>
+        <li>requestId: string</li>
+      </ul>
+    </td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Status203Opt</td>
+    <td>
+      <ul>
+        <li>source: ISource203</li>
+        <li>source.name: string </li>
+        <li>source.description: string (optional) </li>
+        <li>source.url: string (optional) </li>
+      </ul>
+    </td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Status207Opt</td>
+    <td>
+      <ul>
+        <li>states: IBasicState207[]</li>
+        <li>httpStatus: number</li>
+        <li>serverMessage: string</li>
+        <li>detail: string (optional)</li>
+      </ul>
+    </td>
+    <td></td>
+  </tr>
+ </tbody>
+</table>
 
 ### Response3xxRedirection()
 
@@ -457,12 +620,151 @@ Response1xxInformative(statusCode: 100, input: { consultedResource: "potato/getP
     </tr> 
   </tbody>
 </table>
-
+  
 #### Example:
 
+```javascript
+Response3xxRedirection(301, { consultedResource: "/getPotato", detail: "You can found the resource consulting at: '/getPot' endpoint" })
+
+// Output
+{
+  httpStatus: 301,
+  serverMessage: 'Moved Permanently',
+  detail: "You can found the resource consulting at: '/getPot' endpoint",
+  consultedResource: '/getPotato'
+}
+```
+
 #### Default responses:
+```javascript
+
+  // Status300MultipleChoices
+  {
+    httpStatus: 300,
+    serverMessage: "Multiple Choices",
+  }
+
+  // Status301MovedPermanently
+  {
+    httpStatus: 301,
+    serverMessage: "Moved Permanently",
+  }
+
+  // Status302Found
+  {
+    httpStatus: 302,
+    serverMessage: "Found",
+  }
+
+  // Status303SeeOther
+  {
+    httpStatus: 303,
+    serverMessage: "See Other",
+  }
+
+  // Status304NotModified
+  {
+    httpStatus: 304,
+    serverMessage: "Not Modified",
+  }
+
+  // Status305UseProxy
+  {
+    httpStatus: 305,
+    serverMessage: "Use Proxy",
+  }
+
+  // Status307TemporaryRedirect
+  {
+    httpStatus: 307,
+    serverMessage: "Temporary Redirect",
+  }
+
+  // Status308PermanentRedirect
+  {
+    httpStatus: 308,
+    serverMessage: "Permanent Redirect",
+  }
+```
 
 #### Status options:
+
+<table>
+ <thead>
+  <tr>
+    <th>Method</th>
+    <th>Params</th>
+    <th>Description</th>
+  </tr>
+ </thead>
+ <tbody>
+  <tr>
+    <td>Status300Opt</td>
+    <td>
+      <ul>
+        <li>options: Array</li>
+      </ul>
+    </td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Status301Opt</td>
+    <td>
+      <ul>
+        <li>sources: ISources301</li>
+        <li>sources.oldSource: string</li>
+        <li>sources.newSource: string</li>
+      </ul>
+    </td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Status302Opt</td>
+    <td>
+      <ul>
+        <li>redirectUrl: string</li>
+      </ul>
+    </td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Status303Opt</td>
+    <td>
+      <ul>
+        <li>redirectUrl: string</li>
+      </ul>
+    </td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Status305Opt</td>
+    <td>
+      <ul>
+        <li>proxyUrl: string</li>
+      </ul>
+    </td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Status307Opt</td>
+    <td>
+      <ul>
+        <li>redirectUrl: string</li>
+      </ul>
+    </td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Status308Opt</td>
+    <td>
+      <ul>
+        <li>redirectUrl: string</li>
+      </ul>
+    </td>
+    <td></td>
+  </tr>
+ </tbody>
+</table>
 
 ### Response4xxClientError()
 
@@ -584,9 +886,344 @@ Response1xxInformative(statusCode: 100, input: { consultedResource: "potato/getP
 
 #### Example:
 
+> Output includes *success* and *error* fields by default.
+
+```javascript
+Response4xxClientError(404, { consultedResource: "/getPotato", errorCode: "NOT_FOUND_404", detail: "Potato was not found" }, StatusOptions.Status404Opt("Potato n4355"))
+
+// Output
+{
+  httpStatus: 404,
+  serverMessage: 'Not Found',
+  consultedResource: '/getPotato',
+  errorCode: "NOT_FOUND_404",
+  errorDetails: { notFoundResource: 'Potato n4355' },
+  error: true,
+  success: false
+}
+```
+
 #### Default responses:
 
+```javascript
+
+  // Status400BadRequest
+  {
+    httpStatus: 400,
+    serverMessage: "Bad Request",
+  }
+
+  // Status401Unauthorized
+  {
+    httpStatus: 401,
+    serverMessage: "Unauthorized",
+  }
+
+  // Status402PaymentRequired
+  {
+    httpStatus: 402,
+    serverMessage: "Payment Required",
+  }
+
+  // Status403Forbidden
+  {
+    httpStatus: 403,
+    serverMessage: "Forbidden",
+  }
+
+  // Status404NotFound
+  {
+    httpStatus: 404,
+    serverMessage: "Not Found",
+  }
+
+  // Status405MethodNotAllowed
+  {
+    httpStatus: 405,
+    serverMessage: "Method Not Allowed",
+  }
+
+  // Status406NotAcceptable
+  {
+    httpStatus: 406,
+    serverMessage: "Not Acceptable",
+  }
+
+  // Status407ProxyAuthenticationRequired
+  {
+    httpStatus: 407,
+    serverMessage: "Proxy Authentication Required",
+  }
+
+  // Status408RequestTimeout
+  {
+    httpStatus: 408,
+    serverMessage: "Request Timeout",
+  }
+
+  // Status409Conflict
+  {
+    httpStatus: 409,
+    serverMessage: "Conflict",
+  }
+
+  // Status410Gone
+  {
+    httpStatus: 410,
+    serverMessage: "Gone",
+  }
+
+  // Status411LengthRequired
+  {
+    httpStatus: 411,
+    serverMessage: "Length Required",
+  }
+
+  // Status412PreconditionFailed
+  {
+    httpStatus: 412,
+    serverMessage: "Precondition Failed",
+  }
+
+  // Status413PayloadTooLarge
+  {
+    httpStatus: 413,
+    serverMessage: "Payload Too Large",
+  }
+
+  // Status414URITooLong
+  {
+    httpStatus: 414,
+    serverMessage: "URI Too Long",
+  }
+  
+  // Status415UnsupportedMediaType
+  {
+    httpStatus: 415,
+    serverMessage: "Unsupported Media Type",
+  }
+
+  // Status416RangeNotSatisfiable
+  {
+    httpStatus: 416,
+    serverMessage: "Range Not Satisfiable",
+  }
+
+  // Status417ExpectationFailed
+  {
+    httpStatus: 417,
+    serverMessage: "Expectation Failed",
+  }
+
+  // Status418ImATeapot
+  {
+    httpStatus: 418,
+    serverMessage: "I'm a teapot",
+  }
+
+  // Status421MisdirectedRequest
+  {
+    httpStatus: 421,
+    serverMessage: "Misdirected Request",
+  }
+
+  // Status422UnprocessableEntity
+  {
+    httpStatus: 422,
+    serverMessage: "Unprocessable Entity",
+  }
+
+  // Status423Locked
+  {
+    httpStatus: 423,
+    serverMessage: "Locked",
+  }
+
+  // Status424FailedDependency
+  {
+    httpStatus: 424,
+    serverMessage: "Failed Dependency",
+  }
+
+  // Status425Unnassigned
+  {
+    httpStatus: 425,
+    serverMessage: "Unassigned",
+  }
+
+  // Status426UpgradeRequired
+  {
+    httpStatus: 426,
+    serverMessage: "Upgrade Required",
+  }
+
+  // Status428PreconditionRequired
+  {
+    httpStatus: 428,
+    serverMessage: "Precondition Required",
+  }
+
+  // Status429TooManyRequests
+  {
+    httpStatus: 429,
+    serverMessage: "Too Many Requests",
+    // Details: "Too Many Requests"
+  }
+
+  // Status431RequestHeaderFieldsTooLarge
+  {
+    httpStatus: 431,
+    serverMessage: "Request Header Fields Too Large",
+  }
+
+  // Status451UnavailableForLegalReasons
+  {
+    httpStatus: 451,
+    serverMessage: "Unavailable For Legal Reasons",
+  }
+```
+
 #### Status options:
+
+<table>
+ <thead>
+  <tr>
+    <th>Method</th>
+    <th>Params</th>
+    <th>Description</th>
+  </tr>
+ </thead>
+ <tbody>
+  <tr>
+    <td>Status404Opt</td>
+    <td>
+      <ul>
+        <li>notFoundResource: string</li>
+      </ul>
+    </td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Status405Opt</td>
+    <td>
+      <ul>
+        <li>allowedMethods: string[] </li>
+      </ul>
+    </td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Status406Opt</td>
+    <td>
+      <ul>
+        <li>allowedRepresentations: string[] </li>
+      </ul>
+    </td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Status407Opt</td>
+    <td>
+      <ul>
+        <li>authenticationType: string</li>
+        <li>realm: string</li>
+      </ul>
+    </td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Status408Opt</td>
+    <td>
+      <ul>
+        <li>timeWaiting: string</li>
+      </ul>
+    </td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Status409Opt</td>
+    <td>
+      <ul>
+        <li>conflictResource: string</li>
+        <li>conflictId: string</li>
+      </ul>
+    </td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Status410Opt</td>
+    <td>
+      <ul>
+        <li>goneResource: string</li>
+        <li>reason: string</li>
+      </ul>
+    </td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Status411Opt</td>
+    <td>
+      -
+    </td>
+    <td>Adds the field 'requiredHeader': 'Content-Length'</td>
+  </tr>
+  <tr>
+    <td>Status413Opt</td>
+    <td>
+      <ul>
+        <li>maxAllowedSize: string</li>
+      </ul>
+    </td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Status414Opt</td>
+    <td>
+      <ul>
+        <li>maxAllowedLength: string</li>
+      </ul>
+    </td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Status415Opt</td>
+    <td>
+      <ul>
+        <li>supportedMediaTypes: string[] </li>
+      </ul>
+    </td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Status416Opt</td>
+    <td>
+      <ul>
+        <li>requestedContentRange: string</li>
+        <li>supportedContentRange: string</li>
+      </ul>
+    </td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Status423Opt</td>
+    <td>
+      <ul>
+        <li>lockedResource: string </li>
+      </ul>
+    </td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Status424Opt</td>
+    <td>
+      <ul>
+        <li>failedDependency: string</li>
+      </ul>
+    </td>
+    <td></td>
+  </tr>
+ </tbody>
+</table>
 
 ### Response5xxServerError()
 
@@ -698,4 +1335,101 @@ Response1xxInformative(statusCode: 100, input: { consultedResource: "potato/getP
 
 #### Example:
 
+> Output includes *success* and *error* fields by default.
+
+```javascript
+Response5xxServerError(500, { consultedResource: "/getPotato", errorCode: "500SERVERERROR", errorName: "INTERNAL_SERVER_ERROR" })
+
+// Output
+{
+  httpStatus: 500,
+  serverMessage: 'Internal Server Error',
+  consultedResource: '/getPotato',
+  errorCode: '500SERVERERROR',
+  errorName: 'INTERNAL_SERVER_ERROR',
+  error: true,
+  success: false
+}
+```
+
 #### Default responses:
+
+```javascript
+  // Status500InternalServerError
+  {
+    httpStatus: 500,
+    serverMessage: "Internal Server Error",
+  }
+
+  // Status501NotImplemented
+  {
+    httpStatus: 501,
+    serverMessage: "Not Implemented",
+  }
+
+  // Status502BadGateway
+  {
+    httpStatus: 502,
+    serverMessage: "Bad Gateway",
+  }
+
+  // Status503ServiceUnavailable
+  {
+    httpStatus: 503,
+    serverMessage: "Service Unavailable",
+  }
+
+  // Status504GatewayTimeout
+  {
+    httpStatus: 504,
+    serverMessage: "Gateway Timeout",
+  }
+
+  // Status505HTTPVersionNotSupported
+  {
+    httpStatus: 505,
+    serverMessage: "HTTP Version Not Supported",
+  }
+
+  // Status506VariantAlsoNegotiates
+  {
+    httpStatus: 506,
+    serverMessage: "Variant Also Negotiates",
+  }
+
+  // Status507InsufficientStorage
+  {
+    httpStatus: 507,
+    serverMessage: "Insufficient Storage",
+  }
+
+  // Status508LoopDetected
+  {
+    httpStatus: 508,
+    serverMessage: "Loop Detected",
+  }
+
+  // Status509BandwithLimitExceeded
+  {
+    httpStatus: 509,
+    serverMessage: "Bandwith Limit Exceeded",
+  }
+
+  // Status510NotExtended
+  {
+    httpStatus: 510,
+    serverMessage: "Not Extended",
+  }
+
+  // Status511NetworkAuthenticationRequired
+  {
+    httpStatus: 511,
+    serverMessage: "Network Authentication Required",
+  }
+
+  // Status521WebServerIsDown
+  {
+    httpStatus: 521,
+    serverMessage: "Web Server Is Down",
+  }
+```

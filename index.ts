@@ -228,6 +228,8 @@ export function Response4xxClientError(statusCode: StatusCode4xx, input?: BaseEr
     errorDescription: input?.errorDescription,
     errorName: input?.errorName,
 
+    errorDetails: {},
+
     error: true,
     success: false
   }
