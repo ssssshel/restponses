@@ -17,7 +17,7 @@ describe("Pruebas de metodos 100", () => {
 
 describe("Pruebas de metodos 200", () => {
   it("200", () => {
-    const response = Response2xxSuccessful(204, { consultedResource: "/getPotato" })
+    const response = Response2xxSuccessful(200, { consultedResource: "/getPotato", data: [{ ddd: "dd" }] })
     console.log({ response })
     expect(response.httpStatus).toEqual(200)
   })

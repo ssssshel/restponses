@@ -79,6 +79,7 @@ export function Response2xxSuccessful(statusCode: StatusCode2xx, input?: BaseSuc
     httpStatus: statusCode,
     serverMessage: input?.serverMessage || defaultValues.Message,
     detail: input?.detail || defaultValues.Details,
+    data: input?.data,
     consultedResource: input?.consultedResource,
     success: true,
     error: false,
