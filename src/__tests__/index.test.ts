@@ -2,9 +2,7 @@
 import { GenericInformativeResponse } from "../interfaces/bases"
 
 import type * as MainMethods from "../../index"
-import type * as Options from "../../utils/status_options"
-const { Response1xxInformative, Response2xxSuccessful, Response3xxRedirection, Response4xxClientError, Response5xxServerError } = jest.requireActual<typeof MainMethods>("../../index")
-const { StatusOptions } = jest.requireActual<typeof Options>("../../utils/status_options")
+const { Response1xxInformative, Response2xxSuccessful, Response3xxRedirection, Response4xxClientError, Response5xxServerError, StatusOptions } = jest.requireActual<typeof MainMethods>("../../index")
 
 
 describe("Pruebas de metodos 100", () => {

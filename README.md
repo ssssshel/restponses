@@ -167,7 +167,7 @@ Response2xxSuccessful(200, { consultedResource: "/getPotato", data: dbResponse, 
 The third and last parameter, statusOptions params allows you introduce specific field/s related to the status code of your response. For example, if you want to add the url where is your created resource (201), or the not found URL or resource (404), you can simply use the corresponding StatusOption method. You just have to import the class and access the desired method:
 
 ```javascript
-import { StatusOptions } from "restponses/dist/utils/status_options"
+import { StatusOptions } from "restponses"
 
 Response2xxSuccessful(201, { consultedResource: "/createPotato", serverMessage: "Potato created" }, StatusOptions.Status201Opt("https://potato.api/34"))
 
