@@ -1,4 +1,5 @@
 import { StatusCode1xx, StatusCode2xx, StatusCode3xx, StatusCode4xx, StatusCode5xx } from "./state_codes";
+import { StatusCode } from "./status_codes_defaults";
 
 interface SuccessErrorProps {
   /**
@@ -32,7 +33,7 @@ export interface GenericInformativeResponse extends BaseInput {
   /**
    * HTTP Status Code
    */
-  httpStatus: StatusCode1xx
+  httpStatus: StatusCode
 }
 
 // 200s
@@ -44,7 +45,7 @@ export interface BaseSuccessfullInput extends BaseInput {
 }
 
 export interface GenericSuccessfullResponse extends BaseSuccessfullInput, SuccessErrorProps {
-  httpStatus: StatusCode2xx
+  httpStatus: StatusCode
 
   /**
    * 201 ONLY | URL or place where your creation can be found
@@ -100,7 +101,7 @@ export interface GenericRedirectionResponse extends BaseInput {
   /**
    * HTTP Status Code
    */
-  httpStatus: StatusCode3xx
+  httpStatus: StatusCode
 
   /**
    * 300 ONLY | Array of options
@@ -164,7 +165,7 @@ export interface GenericClientErrorResponse extends BaseErrorInput, SuccessError
   /**
    * HTTP Status Code
    */
-  httpStatus: StatusCode4xx
+  httpStatus: StatusCode
   /**
    *  Client error details
    */
@@ -270,5 +271,5 @@ export interface GenericServerErrorResponse extends BaseErrorInput, SuccessError
   /**
    * HTTP Status Code
    */
-  httpStatus: StatusCode5xx
+  httpStatus: StatusCode
 }

@@ -3,7 +3,7 @@ export interface HttpStatus {
     Message: string;
     Details?: string;
 }
-declare enum StatusCode {
+export declare enum StatusCode {
     Status100 = 100,
     Status101 = 101,
     Status102 = 102,

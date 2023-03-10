@@ -31,20 +31,20 @@ The most simpliest way to use these methods is entering the only mandatory param
     const {id} = req.params
     if(!id){
       //Example 1 (400BadRequest)
-      return res.json(Response4xxClientError(400))
+      return res.json(Response4xxClientError("400BadRequest"))
     }
     try {
       const potato = dbGetPotato(id)
       if(!potato){
         // Example 2 (404NotFound)
-        return res.json(Response4xxClientError(404))
+        return res.json(Response4xxClientError("404NotFound"))
       }else{
         // Example 3 (200Ok)
-        return res.json(Response2xxSuccessful(200))
+        return res.json(Response2xxSuccessful("200Ok"))
       }
     } catch (error) {
       // Example 4 (500InternalServerError)
-      return res.json(Responses5xxServerError(500))
+      return res.json(Responses5xxServerError("500InternalServerError"))
     }
   })
 
@@ -94,7 +94,7 @@ The outputs would be these:
 You can also overwrite the fields *serverMessage* and *detail* with custom information using the second parameter: **input**. You can even add information about the consulted resource, data obtained or details of errors in the same way:
 
 ```javascript
-Response1xxInformative(100, { consultedResource: "/getPotato", serverMessage: "/getPotato consulted", detail: "please continue"})
+Response1xxInformative("100Continue", { consultedResource: "/getPotato", serverMessage: "/getPotato consulted", detail: "please continue"})
 
   //Output
   {
@@ -105,7 +105,7 @@ Response1xxInformative(100, { consultedResource: "/getPotato", serverMessage: "/
   }
 
 
-Response2xxSuccessful(200, { consultedResource: "/getPotato", data: dbResponse, serverMessage: "Potato was found", detail: "now you can eat potato" })
+Response2xxSuccessful("200Ok", { consultedResource: "/getPotato", data: dbResponse, serverMessage: "Potato was found", detail: "now you can eat potato" })
 
   // Output
   {
@@ -122,7 +122,7 @@ Response2xxSuccessful(200, { consultedResource: "/getPotato", data: dbResponse, 
     error: false
   }
 
-  Response3xxRedirection(300, { consultedResource: "/getPotato", detail: "Potato was found, but you can't eat it now", serverMessage: "Potato was found, now choose one" })
+  Response3xxRedirection("300MultipleChoices", { consultedResource: "/getPotato", detail: "Potato was found, but you can't eat it now", serverMessage: "Potato was found, now choose one" })
 
   // Output
   {
@@ -132,7 +132,7 @@ Response2xxSuccessful(200, { consultedResource: "/getPotato", data: dbResponse, 
     consultedResource: '/getPotato'
   }
 
-  Response4xxClientError(404, { consultedResource: "/getPotato", detail: "Potato was not found", serverMessage: "Potato was not found", errorCode: "404NOTFOUND", errorName: "PotatoNotFound", errorDescription: "Your resource was not found" })
+  Response4xxClientError("404NotFound", { consultedResource: "/getPotato", detail: "Potato was not found", serverMessage: "Potato was not found", errorCode: "404NOTFOUND", errorName: "PotatoNotFound", errorDescription: "Your resource was not found" })
   
   // Output
   {
@@ -147,7 +147,7 @@ Response2xxSuccessful(200, { consultedResource: "/getPotato", data: dbResponse, 
     success: false
   }
 
-  Response5xxServerError(500, { consultedResource: "/getPotato", serverMessage: "Potato was not found due to a server error", errorCode: "500SERVERERROR", errorName: "INTERNAL_SERVER_ERROR" })
+  Response5xxServerError("500InternalServerError", { consultedResource: "/getPotato", serverMessage: "Potato was not found due to a server error", errorCode: "500SERVERERROR", errorName: "INTERNAL_SERVER_ERROR" })
 
   // Output
   {
@@ -169,7 +169,7 @@ The third and last parameter, statusOptions params allows you introduce specific
 ```javascript
 import { StatusOptions } from "restponses"
 
-Response2xxSuccessful(201, { consultedResource: "/createPotato", serverMessage: "Potato created" }, StatusOptions.Status201Opt("https://potato.api/34"))
+Response2xxSuccessful("201Created", { consultedResource: "/createPotato", serverMessage: "Potato created" }, StatusOptions.Status201Opt("https://potato.api/34"))
 
 //Output
   {
@@ -210,7 +210,7 @@ As you read above, Restponses gives you five base methods to generate responses 
   <tbody>
     <tr>
       <td>statusCode</td>
-      <td>number</td>
+      <td>StatusCode1xx</td>
       <td>
         <ul>
           <li>Mandatory</li>
@@ -266,7 +266,7 @@ As you read above, Restponses gives you five base methods to generate responses 
 
 #### Example:
 ```javascript
-Response1xxInformative(statusCode: 100, input: { consultedResource: "potato/getPotato" })
+Response1xxInformative(statusCode: "100Continue", input: { consultedResource: "potato/getPotato" })
 
 // Output
 {
@@ -322,7 +322,7 @@ Response1xxInformative(statusCode: 100, input: { consultedResource: "potato/getP
   <tbody>
     <tr>
       <td>statusCode</td>
-      <td>number</td>
+      <td>StatusCode2xx</td>
       <td>
         <ul>
           <li>Mandatory</li>
@@ -401,7 +401,7 @@ Response1xxInformative(statusCode: 100, input: { consultedResource: "potato/getP
 > Output includes *success* and *error* fields by default.
 
 ```javascript
-Response2xxSuccessful(200, { consultedResource: "/getPotato" })
+Response2xxSuccessful("200Ok", { consultedResource: "/getPotato" })
 
 // Output
 {
@@ -559,7 +559,7 @@ Response2xxSuccessful(200, { consultedResource: "/getPotato" })
   <tbody>
     <tr>
       <td>statusCode</td>
-      <td>number</td>
+      <td>StatusCode3xx</td>
       <td>
       <ul>
           <li>Mandatory</li>
@@ -624,7 +624,7 @@ Response2xxSuccessful(200, { consultedResource: "/getPotato" })
 #### Example:
 
 ```javascript
-Response3xxRedirection(301, { consultedResource: "/getPotato", detail: "You can found the resource consulting at: '/getPot' endpoint" })
+Response3xxRedirection("301MovedPermanently", { consultedResource: "/getPotato", detail: "You can found the resource consulting at: '/getPot' endpoint" })
 
 // Output
 {
@@ -782,7 +782,7 @@ Response3xxRedirection(301, { consultedResource: "/getPotato", detail: "You can 
   <tbody>
     <tr>
       <td>statusCode</td>
-      <td>number</td>
+      <td>StatusCode4xx</td>
       <td>
       <ul>
           <li>Mandatory</li>
@@ -889,7 +889,7 @@ Response3xxRedirection(301, { consultedResource: "/getPotato", detail: "You can 
 > Output includes *success* and *error* fields by default.
 
 ```javascript
-Response4xxClientError(404, { consultedResource: "/getPotato", errorCode: "NOT_FOUND_404", detail: "Potato was not found" }, StatusOptions.Status404Opt("Potato n4355"))
+Response4xxClientError("404NotFound", { consultedResource: "/getPotato", errorCode: "NOT_FOUND_404", detail: "Potato was not found" }, StatusOptions.Status404Opt("Potato n4355"))
 
 // Output
 {
@@ -1241,7 +1241,7 @@ Response4xxClientError(404, { consultedResource: "/getPotato", errorCode: "NOT_F
   <tbody>
     <tr>
       <td>statusCode</td>
-      <td>number</td>
+      <td>StatusCode5xx</td>
       <td>
       <ul>
           <li>Mandatory</li>
@@ -1338,7 +1338,7 @@ Response4xxClientError(404, { consultedResource: "/getPotato", errorCode: "NOT_F
 > Output includes *success* and *error* fields by default.
 
 ```javascript
-Response5xxServerError(500, { consultedResource: "/getPotato", errorCode: "500SERVERERROR", errorName: "INTERNAL_SERVER_ERROR" })
+Response5xxServerError("500InternalServerError", { consultedResource: "/getPotato", errorCode: "500SERVERERROR", errorName: "INTERNAL_SERVER_ERROR" })
 
 // Output
 {

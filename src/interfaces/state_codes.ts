@@ -1,91 +1,78 @@
-export enum StatusCode1xx {
-  Status100 = 100, // Continue
-  Status101 = 101, // Switching Protocols
-  Status102 = 102, // Processing
-  Status103 = 103, // Early Hints
+export interface StatusCode1xx {
+  "100Continue": 100,
+  "101SwitchingProtocols": 101,
+  "102Processing": 102,
+  "103EarlyHints": 103,
 }
 
-export enum StatusCode2xx {
-  Status200 = 200, // OK
-  Status201 = 201, // Created
-  Status202 = 202, // Accepted
-  Status203 = 203, // Non-Authoritative Information
-  Status204 = 204, // No Content
-  Status205 = 205, // Reset Content
-  Status206 = 206, // Partial Content
-  Status207 = 207, // Multi-Status
-  Status208 = 208, // Already Reported
-  Status226 = 226, // IM Used
+export interface StatusCode2xx {
+  "200OK": 200,
+  "201Created": 201,
+  "202Accepted": 202,
+  "203NonAuthoritativeInformation": 203,
+  "204NoContent": 204,
+  "205ResetContent": 205,
+  "206PartialContent": 206,
+  "207MultiStatus": 207,
+  "208AlreadyReported": 208,
+  "226IMUsed": 226,
 }
 
-export enum StatusCode3xx {
-  Status300 = 300, // Multiple Choices
-  Status301 = 301, // Moved Permanently
-  Status302 = 302, // Found
-  Status303 = 303, // See Other
-  Status304 = 304, // Not Modified
-  Status305 = 305, // Use Proxy
-  Status307 = 307, // Temporary Redirect
-  Status308 = 308, // Permanent Redirect
+export interface StatusCode3xx {
+  "300MultipleChoices": 300,
+  "301MovedPermanently": 301,
+  "302Found": 302,
+  "303SeeOther": 303,
+  "304NotModified": 304,
+  "305UseProxy": 305,
+  "307TemporaryRedirect": 307,
+  "308PermanentRedirect": 308,
 }
 
-export enum StatusCode4xx {
-  Status400 = 400, // Bad Request
-  Status401 = 401, // Unauthorized
-  Status402 = 402, // Payment Required
-  Status403 = 403, // Forbidden
-  Status404 = 404, // Not Found
-  Status405 = 405, // Method Not Allowed
-  Status406 = 406, // Not Acceptable
-  Status407 = 407, // Proxy Authentication Required
-  Status408 = 408, // Request Timeout
-  Status409 = 409, // Conflict
-  Status410 = 410, // Gone
-  Status411 = 411, // Length Required
-  Status412 = 412, // Precondition Failed
-  Status413 = 413, // Payload Too Large
-  Status414 = 414, // URI Too Long
-  Status415 = 415, // Unsupported Media Type
-  Status416 = 416, // Range Not Satisfiable
-  Status417 = 417, // Expectation Failed
-  Status418 = 418, // I'm a teapot
-  Status421 = 421, // Misdirected Request
-  Status422 = 422, // Unprocessable Entity
-  Status423 = 423, // Locked
-  Status424 = 424, // Failed Dependency
-  Status425 = 425, // Unordered Collection
-  Status426 = 426, // Upgrade Required
-  Status428 = 428, // Precondition Required
-  Status429 = 429, // Too Many Requests
-  Status431 = 431, // Request Header Fields Too Large
-  Status451 = 451, // Unavailable For Legal Reasons
+export interface StatusCode4xx {
+  "400BadRequest": 400,
+  "401Unauthorized": 401,
+  "402PaymentRequired": 402,
+  "403Forbidden": 403,
+  "404NotFound": 404,
+  "405MethodNotAllowed": 405,
+  "406NotAcceptable": 406,
+  "407ProxyAuthenticationRequired": 407,
+  "408RequestTimeout": 408,
+  "409Conflict": 409,
+  "410Gone": 410,
+  "411LengthRequired": 411,
+  "412PreconditionFailed": 412,
+  "413PayloadTooLarge": 413,
+  "414URITooLong": 414,
+  "415UnsupportedMediaType": 415,
+  "416RangeNotSatisfiable": 416,
+  "417ExpectationFailed": 417,
+  "418ImATeapot": 418,
+  "421MisdirectedRequest": 421,
+  "422UnprocessableEntity": 422,
+  "423Locked": 423,
+  "424FailedDependency": 424,
+  "425TooEarly": 425,
+  "426UpgradeRequired": 426,
+  "428PreconditionRequired": 428,
+  "429TooManyRequests": 429,
+  "431RequestHeaderFieldsTooLarge": 431,
+  "451UnavailableForLegalReasons": 451,
 }
 
-export enum StatusCode5xx {
-  // Server error
-  Status500 = 500,
-  // Not implemented
-  Status501 = 501,
-  // Bad gateway
-  Status502 = 502,
-  // Service unavailable
-  Status503 = 503,
-  // Gateway timeout
-  Status504 = 504,
-  // HTTP version not supported
-  Status505 = 505,
-  // Variant also negotiates
-  Status506 = 506,
-  // Insufficient storage
-  Status507 = 507,
-  // Loop detected
-  Status508 = 508,
-  // Bandwidth limit exceeded
-  Status509 = 509,
-  // Not extended
-  Status510 = 510,
-  // Network authentication required
-  Status511 = 511,
-  // Web server is down
-  Status521 = 521,
+export interface StatusCode5xx {
+  "500InternalServerError": 500,
+  "501NotImplemented": 501,
+  "502BadGateway": 502,
+  "503ServiceUnavailable": 503,
+  "504GatewayTimeout": 504,
+  "505HTTPVersionNotSupported": 505,
+  "506VariantAlsoNegotiates": 506,
+  "507InsufficientStorage": 507,
+  "508LoopDetected": 508,
+  "509BandwidthLimitExceeded": 509,
+  "510NotExtended": 510,
+  "511NetworkAuthenticationRequired": 511,
+  "521ConnectionTimedOut": 521,
 }

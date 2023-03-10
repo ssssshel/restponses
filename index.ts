@@ -9,17 +9,17 @@ import { Response2xxOpt, Response3xxOpt, Response4xxOpt } from "./src/methods/op
  * @param input 
  * 
  */
-export function Response1xxInformative(statusCode: StatusCode1xx, input?: BaseInput): GenericInformativeResponse {
+export function Response1xxInformative(statusCode: keyof StatusCode1xx, input?: BaseInput): GenericInformativeResponse {
 
   const defaultValuesSelector = (): HttpStatus => {
     switch (statusCode) {
-      case 100:
+      case "100Continue":
         return defaultStatesContent["Status100Continue"]
-      case 101:
+      case "101SwitchingProtocols":
         return defaultStatesContent["Status101SwitchingProtocols"]
-      case 102:
+      case "102Processing":
         return defaultStatesContent["Status102Processing"]
-      case 103:
+      case "103EarlyHints":
         return defaultStatesContent["Status103EarlyHints"]
       default:
         return defaultStatesContent["Status100Continue"]
@@ -29,7 +29,7 @@ export function Response1xxInformative(statusCode: StatusCode1xx, input?: BaseIn
   const defaultValues = defaultValuesSelector()
 
   const response = {
-    httpStatus: statusCode,
+    httpStatus: defaultValues.Code,
     serverMessage: input?.serverMessage || defaultValues.Message,
     detail: input?.detail || defaultValues.Details,
     consultedResource: input?.consultedResource
@@ -45,28 +45,28 @@ export function Response1xxInformative(statusCode: StatusCode1xx, input?: BaseIn
  * @param statusOptions  
  * @returns 
  */
-export function Response2xxSuccessful(statusCode: StatusCode2xx, input?: BaseSuccessfullInput, statusOptions?: Response2xxOpt): GenericSuccessfullResponse {
+export function Response2xxSuccessful(statusCode: keyof StatusCode2xx, input?: BaseSuccessfullInput, statusOptions?: Response2xxOpt): GenericSuccessfullResponse {
   const defaultValuesSelector = (): HttpStatus => {
     switch (statusCode) {
-      case 200:
+      case "200OK":
         return defaultStatesContent["Status200OK"]
-      case 201:
+      case "201Created":
         return defaultStatesContent["Status201Created"]
-      case 202:
+      case "202Accepted":
         return defaultStatesContent["Status202Accepted"]
-      case 203:
+      case "203NonAuthoritativeInformation":
         return defaultStatesContent["Status203NonAuthoritativeInformation"]
       // case 204:
       //   return defaultStatesContent["Status204NoContent"]
-      case 205:
+      case "205ResetContent":
         return defaultStatesContent["Status205ResetContent"]
-      case 206:
+      case "206PartialContent":
         return defaultStatesContent["Status206PartialContent"]
-      case 207:
+      case "207MultiStatus":
         return defaultStatesContent["Status207MultiStatus"]
-      case 208:
+      case "208AlreadyReported":
         return defaultStatesContent["Status208AlreadyReported"]
-      case 226:
+      case "226IMUsed":
         return defaultStatesContent["Status226IMUsed"]
       default:
         return defaultStatesContent["Status200OK"]
@@ -76,7 +76,7 @@ export function Response2xxSuccessful(statusCode: StatusCode2xx, input?: BaseSuc
   const defaultValues = defaultValuesSelector()
 
   let response: GenericSuccessfullResponse = {
-    httpStatus: statusCode,
+    httpStatus: defaultValues.Code,
     serverMessage: input?.serverMessage || defaultValues.Message,
     detail: input?.detail || defaultValues.Details,
     data: input?.data,
@@ -87,7 +87,7 @@ export function Response2xxSuccessful(statusCode: StatusCode2xx, input?: BaseSuc
 
   statusOptions?.(response)
 
-  if (statusCode === 204) {
+  if (statusCode === "204NoContent") {
     response = {
       httpStatus: 204,
       error: false,
@@ -105,24 +105,24 @@ export function Response2xxSuccessful(statusCode: StatusCode2xx, input?: BaseSuc
  * @param statusOptions 
  * @returns 
  */
-export function Response3xxRedirection(statusCode: StatusCode3xx, input?: BaseInput, statusOptions?: Response3xxOpt): GenericRedirectionResponse {
+export function Response3xxRedirection(statusCode: keyof StatusCode3xx, input?: BaseInput, statusOptions?: Response3xxOpt): GenericRedirectionResponse {
   const defaultValuesSelector = (): HttpStatus => {
     switch (statusCode) {
-      case 300:
+      case "300MultipleChoices":
         return defaultStatesContent["Status300MultipleChoices"]
-      case 301:
+      case "301MovedPermanently":
         return defaultStatesContent["Status301MovedPermanently"]
-      case 302:
+      case "302Found":
         return defaultStatesContent["Status302Found"]
-      case 303:
+      case "303SeeOther":
         return defaultStatesContent["Status303SeeOther"]
-      case 304:
+      case "304NotModified":
         return defaultStatesContent["Status304NotModified"]
-      case 305:
+      case "305UseProxy":
         return defaultStatesContent["Status305UseProxy"]
-      case 307:
+      case "307TemporaryRedirect":
         return defaultStatesContent["Status307TemporaryRedirect"]
-      case 308:
+      case "308PermanentRedirect":
         return defaultStatesContent["Status308PermanentRedirect"]
       default:
         return defaultStatesContent["Status300MultipleChoices"]
@@ -132,7 +132,7 @@ export function Response3xxRedirection(statusCode: StatusCode3xx, input?: BaseIn
   const defaultValues = defaultValuesSelector()
 
   let response: GenericRedirectionResponse = {
-    httpStatus: statusCode,
+    httpStatus: defaultValues.Code,
     serverMessage: input?.serverMessage || defaultValues.Message,
     detail: input?.detail || defaultValues.Details,
     consultedResource: input?.consultedResource,
@@ -150,66 +150,66 @@ export function Response3xxRedirection(statusCode: StatusCode3xx, input?: BaseIn
  * @param statusOptions 
  * @returns 
  */
-export function Response4xxClientError(statusCode: StatusCode4xx, input?: BaseErrorInput, statusOptions?: Response4xxOpt): GenericClientErrorResponse {
+export function Response4xxClientError(statusCode: keyof StatusCode4xx, input?: BaseErrorInput, statusOptions?: Response4xxOpt): GenericClientErrorResponse {
   const defaultValuesSelector = (): HttpStatus => {
     switch (statusCode) {
-      case 400:
+      case "400BadRequest":
         return defaultStatesContent["Status400BadRequest"]
-      case 401:
+      case "401Unauthorized":
         return defaultStatesContent["Status401Unauthorized"]
-      case 402:
+      case "402PaymentRequired":
         return defaultStatesContent["Status402PaymentRequired"]
-      case 403:
+      case "403Forbidden":
         return defaultStatesContent["Status403Forbidden"]
-      case 404:
+      case "404NotFound":
         return defaultStatesContent["Status404NotFound"]
-      case 405:
+      case "405MethodNotAllowed":
         return defaultStatesContent["Status405MethodNotAllowed"]
-      case 406:
+      case "406NotAcceptable":
         return defaultStatesContent["Status406NotAcceptable"]
-      case 407:
+      case "407ProxyAuthenticationRequired":
         return defaultStatesContent["Status407ProxyAuthenticationRequired"]
-      case 408:
+      case "408RequestTimeout":
         return defaultStatesContent["Status408RequestTimeout"]
-      case 409:
+      case "409Conflict":
         return defaultStatesContent["Status409Conflict"]
-      case 410:
+      case "410Gone":
         return defaultStatesContent["Status410Gone"]
-      case 411:
+      case "411LengthRequired":
         return defaultStatesContent["Status411LengthRequired"]
-      case 412:
+      case "412PreconditionFailed":
         return defaultStatesContent["Status412PreconditionFailed"]
-      case 413:
+      case "413PayloadTooLarge":
         return defaultStatesContent["Status413PayloadTooLarge"]
-      case 414:
+      case "414URITooLong":
         return defaultStatesContent["Status414URITooLong"]
-      case 415:
+      case "415UnsupportedMediaType":
         return defaultStatesContent["Status415UnsupportedMediaType"]
-      case 416:
+      case "416RangeNotSatisfiable":
         return defaultStatesContent["Status416RangeNotSatisfiable"]
-      case 417:
+      case "417ExpectationFailed":
         return defaultStatesContent["Status417ExpectationFailed"]
-      case 418:
+      case "418ImATeapot":
         return defaultStatesContent["Status418ImATeapot"]
-      case 421:
+      case "421MisdirectedRequest":
         return defaultStatesContent["Status421MisdirectedRequest"]
-      case 422:
+      case "422UnprocessableEntity":
         return defaultStatesContent["Status422UnprocessableEntity"]
-      case 423:
+      case "423Locked":
         return defaultStatesContent["Status423Locked"]
-      case 424:
+      case "424FailedDependency":
         return defaultStatesContent["Status424FailedDependency"]
-      case 425:
+      case "425TooEarly":
         return defaultStatesContent["Status425TooEarly"]
-      case 426:
+      case "426UpgradeRequired":
         return defaultStatesContent["Status426UpgradeRequired"]
-      case 428:
+      case "428PreconditionRequired":
         return defaultStatesContent["Status428PreconditionRequired"]
-      case 429:
+      case "429TooManyRequests":
         return defaultStatesContent["Status429TooManyRequests"]
-      case 431:
+      case "431RequestHeaderFieldsTooLarge":
         return defaultStatesContent["Status431RequestHeaderFieldsTooLarge"]
-      case 451:
+      case "451UnavailableForLegalReasons":
         return defaultStatesContent["Status451UnavailableForLegalReasons"]
       default:
         return defaultStatesContent["Status400BadRequest"]
@@ -219,7 +219,7 @@ export function Response4xxClientError(statusCode: StatusCode4xx, input?: BaseEr
   const defaultValues = defaultValuesSelector()
 
   let response: GenericClientErrorResponse = {
-    httpStatus: statusCode,
+    httpStatus: defaultValues.Code,
     serverMessage: input?.serverMessage || defaultValues.Message,
     // detail: input?.detail || defaultValues.Details,
     consultedResource: input?.consultedResource,
@@ -247,34 +247,34 @@ export function Response4xxClientError(statusCode: StatusCode4xx, input?: BaseEr
  * @param input 
  * @returns 
  */
-export function Response5xxServerError(statusCode: StatusCode5xx, input?: BaseErrorInput): GenericServerErrorResponse {
+export function Response5xxServerError(statusCode: keyof StatusCode5xx, input?: BaseErrorInput): GenericServerErrorResponse {
   const defaultValuesSelector = (): HttpStatus => {
     switch (statusCode) {
-      case 500:
+      case "500InternalServerError":
         return defaultStatesContent["Status500InternalServerError"]
-      case 501:
+      case "501NotImplemented":
         return defaultStatesContent["Status501NotImplemented"]
-      case 502:
+      case "502BadGateway":
         return defaultStatesContent["Status502BadGateway"]
-      case 503:
+      case "503ServiceUnavailable":
         return defaultStatesContent["Status503ServiceUnavailable"]
-      case 504:
+      case "504GatewayTimeout":
         return defaultStatesContent["Status504GatewayTimeout"]
-      case 505:
+      case "505HTTPVersionNotSupported":
         return defaultStatesContent["Status505HTTPVersionNotSupported"]
-      case 506:
+      case "506VariantAlsoNegotiates":
         return defaultStatesContent["Status506VariantAlsoNegotiates"]
-      case 507:
+      case "507InsufficientStorage":
         return defaultStatesContent["Status507InsufficientStorage"]
-      case 508:
+      case "508LoopDetected":
         return defaultStatesContent["Status508LoopDetected"]
-      case 509:
+      case "509BandwidthLimitExceeded":
         return defaultStatesContent["Status509BandwidthLimitExceeded"]
-      case 510:
+      case "510NotExtended":
         return defaultStatesContent["Status510NotExtended"]
-      case 511:
+      case "511NetworkAuthenticationRequired":
         return defaultStatesContent["Status511NetworkAuthenticationRequired"]
-      case 521:
+      case "521ConnectionTimedOut":
         return defaultStatesContent["Status521WebServerIsDown"]
       default:
         return defaultStatesContent["Status500InternalServerError"]
@@ -282,7 +282,7 @@ export function Response5xxServerError(statusCode: StatusCode5xx, input?: BaseEr
   }
 
   let response: GenericServerErrorResponse = {
-    httpStatus: statusCode,
+    httpStatus: defaultValuesSelector().Code,
     serverMessage: input?.serverMessage || defaultValuesSelector().Message,
     detail: input?.detail || defaultValuesSelector().Details,
     consultedResource: input?.consultedResource,
