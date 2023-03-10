@@ -1,4 +1,4 @@
-import { BaseErrorInput, BaseInput, BaseSuccessfullInput, GenericClientErrorResponse, GenericInformativeResponse, GenericRedirectionResponse, GenericServerErrorResponse, GenericSuccessfullResponse, IBasicState207, ISource203, ISources301 } from "./src/interfaces/bases";
+import { BaseErrorInput, BaseInput, BaseSuccessfulInput, GenericClientErrorResponse, GenericInformativeResponse, GenericRedirectionResponse, GenericServerErrorResponse, GenericSuccessfulResponse, IBasicState207, ISource203, ISources301 } from "./src/interfaces/bases";
 import { StatusCode1xx, StatusCode2xx, StatusCode3xx, StatusCode4xx, StatusCode5xx } from "./src/interfaces/state_codes";
 import { Response2xxOpt, Response3xxOpt, Response4xxOpt } from "./src/methods/options_pattern";
 /**
@@ -15,7 +15,7 @@ export declare function Response1xxInformative(statusCode: keyof StatusCode1xx, 
  * @param statusOptions
  * @returns
  */
-export declare function Response2xxSuccessful(statusCode: keyof StatusCode2xx, input?: BaseSuccessfullInput, statusOptions?: Response2xxOpt): GenericSuccessfullResponse;
+export declare function Response2xxSuccessful(statusCode: keyof StatusCode2xx, input?: BaseSuccessfulInput, statusOptions?: Response2xxOpt): GenericSuccessfulResponse;
 /**
  *
  * @param statusCode HTTP Status Code: (300 Multiple Choices | 301 Moved Permanently | 302 Found | 303 See Other | 304 Not Modified | 305 Use Proxy | 307 Temporary Redirect | 308 Permanent Redirect)
