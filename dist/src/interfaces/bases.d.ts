@@ -29,13 +29,13 @@ export interface GenericInformativeResponse extends BaseInput {
      */
     httpStatus: StatusCode;
 }
-export interface BaseSuccessfullInput extends BaseInput {
+export interface BaseSuccessfulInput extends BaseInput {
     /**
      * Data that the server will send to the client
      */
     data?: any;
 }
-export interface GenericSuccessfullResponse extends BaseSuccessfullInput, SuccessErrorProps {
+export interface GenericSuccessfulResponse extends BaseSuccessfulInput, SuccessErrorProps {
     httpStatus: StatusCode;
     /**
      * 201 ONLY | URL or place where your creation can be found

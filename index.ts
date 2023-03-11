@@ -1,4 +1,4 @@
-import { BaseErrorInput, BaseInput, BaseSuccessfullInput, GenericClientErrorResponse, GenericInformativeResponse, GenericRedirectionResponse, GenericServerErrorResponse, GenericSuccessfullResponse, IBasicState207, ISource203, ISources301 } from "./src/interfaces/bases";
+import { BaseErrorInput, BaseInput, BaseSuccessfulInput, GenericClientErrorResponse, GenericInformativeResponse, GenericRedirectionResponse, GenericServerErrorResponse, GenericSuccessfulResponse, IBasicState207, ISource203, ISources301 } from "./src/interfaces/bases";
 import { defaultStatesContent, HttpStatus } from "./src/interfaces/status_codes_defaults";
 import { StatusCode1xx, StatusCode2xx, StatusCode3xx, StatusCode4xx, StatusCode5xx } from "./src/interfaces/state_codes";
 import { Response2xxOpt, Response3xxOpt, Response4xxOpt } from "./src/methods/options_pattern"
@@ -45,7 +45,7 @@ export function Response1xxInformative(statusCode: keyof StatusCode1xx, input?: 
  * @param statusOptions  
  * @returns 
  */
-export function Response2xxSuccessful(statusCode: keyof StatusCode2xx, input?: BaseSuccessfullInput, statusOptions?: Response2xxOpt): GenericSuccessfullResponse {
+export function Response2xxSuccessful(statusCode: keyof StatusCode2xx, input?: BaseSuccessfulInput, statusOptions?: Response2xxOpt): GenericSuccessfulResponse {
   const defaultValuesSelector = (): HttpStatus => {
     switch (statusCode) {
       case "200OK":
@@ -75,7 +75,7 @@ export function Response2xxSuccessful(statusCode: keyof StatusCode2xx, input?: B
 
   const defaultValues = defaultValuesSelector()
 
-  let response: GenericSuccessfullResponse = {
+  let response: GenericSuccessfulResponse = {
     httpStatus: defaultValues.Code,
     serverMessage: input?.serverMessage || defaultValues.Message,
     detail: input?.detail || defaultValues.Details,
@@ -310,7 +310,7 @@ export class StatusOptions {
    * @example location: "https://example.com/api/v1/users/1"
    */
   static Status201Opt(location: string): Response2xxOpt {
-    return function (props: GenericSuccessfullResponse) {
+    return function (props: GenericSuccessfulResponse) {
       return props.location = location
     }
   }
@@ -321,7 +321,7 @@ export class StatusOptions {
    * @example requestId: "1234567890"
    */
   static Status202Opt(requestId: string): Response2xxOpt {
-    return function (props: GenericSuccessfullResponse) {
+    return function (props: GenericSuccessfulResponse) {
       return props.requestId = requestId
     }
   }
@@ -332,7 +332,7 @@ export class StatusOptions {
    * @example source: { name: "Example", description: "Example of source", url: "https://example.com" }
    */
   static Status203Opt(source: ISource203): Response2xxOpt {
-    return function (props: GenericSuccessfullResponse) {
+    return function (props: GenericSuccessfulResponse) {
       return props.source = source
     }
   }
@@ -343,7 +343,7 @@ export class StatusOptions {
    * @example states: [{ httpStatus: 200, serverMessage: "OK", detail: "Everything is OK" }, { httpStatus: 201, serverMessage: "Created", detail: "Resource created" }]
    */
   static Status207Opt(states: IBasicState207[]): Response2xxOpt {
-    return function (props: GenericSuccessfullResponse) {
+    return function (props: GenericSuccessfulResponse) {
       return props.states = states
     }
   }

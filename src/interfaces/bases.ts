@@ -37,14 +37,14 @@ export interface GenericInformativeResponse extends BaseInput {
 }
 
 // 200s
-export interface BaseSuccessfullInput extends BaseInput {
+export interface BaseSuccessfulInput extends BaseInput {
   /**
    * Data that the server will send to the client
    */
   data?: any
 }
 
-export interface GenericSuccessfullResponse extends BaseSuccessfullInput, SuccessErrorProps {
+export interface GenericSuccessfulResponse extends BaseSuccessfulInput, SuccessErrorProps {
   httpStatus: StatusCode
 
   /**
