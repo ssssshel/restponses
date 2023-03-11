@@ -24,6 +24,10 @@ import {
   } from "restponses"
 ```
 
+### Base Methods Parameters
+
+#### 1. StatusCode Param
+
 The most simpliest way to use these methods is entering the only mandatory parameter, this is the status code for your response. In this way, they will return the minimum default values for each status code, for example, look at this request made with express:
 
 ```javascript
@@ -89,7 +93,7 @@ The outputs would be these:
 
 ```
 
-### Input parameter
+#### 2. Input parameter
 
 You can also overwrite the fields *serverMessage* and *detail* with custom information using the second parameter: **input**. You can even add information about the consulted resource, data obtained or details of errors in the same way:
 
@@ -162,7 +166,7 @@ Response2xxSuccessful("200Ok", { consultedResource: "/getPotato", data: dbRespon
 
 ```
 
-### StatusOptions parameter
+#### 3. StatusOptions parameter
 
 The third and last parameter, statusOptions params allows you introduce specific field/s related to the status code of your response. For example, if you want to add the url where is your created resource (201), or the not found URL or resource (404), you can simply use the corresponding StatusOption method. You just have to import the class and access the desired method:
 
@@ -216,7 +220,13 @@ As you read above, Restponses gives you five base methods to generate responses 
           <li>Mandatory</li>
         </ul>
       </td>
-      <td>Status code of your response. * Supported: 100, 101, 102, 103</td>
+      <td>Status code of your response. <br> Supported: 
+      <ul>
+        <li>"100Continue": 100</li>
+        <li>"101SwitchingProtocols": 101</li>
+        <li>"102Processing": 102</li>
+        <li>"103EarlyHints": 103</li>
+      </ul></td>
     </tr>
     <tr>
       <td>input</td>
@@ -277,36 +287,6 @@ Response1xxInformative(statusCode: "100Continue", input: { consultedResource: "p
 }
 ```
 
-#### Default responses:
-
-```javascript
-// Status100Continue
-{
-  httpStatus: 100,
-  serverMessage: "Continue",
-  detail:
-    "Continue with the request",
-}
-
-// Status101SwitchingProtocols
-{
-  httpStatus: 101,
-  serverMessage: "Switching Protocols",
-}
-
-// Status102Processing
-{
-  httpStatus: 102,
-  serverMessage: "Processing",
-}
-
-// Status103EarlyHints
-{
-  httpStatus: 103,
-  serverMessage: "Checkpoint",
-}
-```
-
 ### Response2xxSuccessful()
 
 #### Params:
@@ -328,7 +308,20 @@ Response1xxInformative(statusCode: "100Continue", input: { consultedResource: "p
           <li>Mandatory</li>
         </ul>
       </td>
-      <td>Status code of your response. *Supported: 200, 201, 202, 203, 204, 205, 206, 207, 208, 226</td>
+      <td>Status code of your response. <br> Supported: 
+      <ul>
+        <li>"200OK": 200</li>
+        <li>"201Created": 201</li>
+        <li>"202Accepted": 202</li>
+        <li>"203NonAuthoritativeInformation": 203</li>
+        <li>"204NoContent": 204</li>
+        <li>"205ResetContent": 205</li>
+        <li>"206PartialContent": 206</li>
+        <li>"207MultiStatus": 207</li>
+        <li>"208AlreadyReported": 208</li>
+        <li>"226IMUsed": 226</li>
+      </ul>
+      </td>
     </tr>
     <tr>
       <td>input</td>
@@ -414,79 +407,6 @@ Response2xxSuccessful("200Ok", { consultedResource: "/getPotato" })
 }
 ```
 
-#### Default responses:
-
-```javascript
-
-  // Status200OK
-  {
-    httpStatus: 200,
-    serverMessage: "OK",
-    detail: "The request has been successfully processed"
-  }
-
-  // Status201Created
-  {
-    httpStatus: 201,
-    serverMessage: "Created",
-    detail: "Resource successfully created"
-  }
-
-  // Status202Accepted
-  {
-    httpStatus: 202,
-    serverMessage: "Accepted",
-    detail: "The request has been accepted for processing"
-  }
-
-  // Status203NonAuthoritativeInformation
-  {
-    httpStatus: 203,
-    serverMessage: "Non-Authoritative Information",
-    detail: "Non-Authoritative Information returned"
-  }
-
-  // Status204NoContent
-  {
-    httpStatus: 204
-  }
-
-  // Status205ResetContent
-  {
-    httpStatus: 205,
-    serverMessage: "Reset Content",
-    detail: "The request has been successfully processed, but no content is returned"
-  }
-
-  // Status206PartialContent
-  {
-    httpStatus: 206,
-    serverMessage: "Partial Content",
-    detail: "Partial Content returned"
-  }
-
-  // Status207MultiStatus
-  {
-    httpStatus: 207,
-    serverMessage: "Multi-Status",
-    detail: "Multi-Status returned"
-  }
-
-  // Status208AlreadyReported
-  {
-    httpStatus: 208,
-    serverMessage: "Already Reported",
-    detail: "Resource already reported"
-  }
-
-  // Status226IMUsed
-  {
-    httpStatus: 226,
-    serverMessage: "IM Used",
-    detail: "IM Used"
-  }
-```
-
 #### Status options:
 
 <table>
@@ -565,7 +485,18 @@ Response2xxSuccessful("200Ok", { consultedResource: "/getPotato" })
           <li>Mandatory</li>
       </ul>
       </td>
-      <td>Status code of your response. *Supported: 300, 301, 302, 303, 304, 305, 307, 308</td>
+      <td>Status code of your response. <br> Supported: 
+      <ul>
+        <li>"300MultipleChoices": 300</li>
+        <li>"301MovedPermanently": 301</li>
+        <li>"302Found": 302</li>
+        <li>"303SeeOther": 303</li>
+        <li>"304NotModified": 304</li>
+        <li>"305UseProxy": 305</li>
+        <li>"307TemporaryRedirect": 307</li>
+        <li>"308PermanentRedirect": 308</li>
+      </ul>
+      </td>
     </tr> 
     <tr>
       <td>input</td>
@@ -633,58 +564,6 @@ Response3xxRedirection("301MovedPermanently", { consultedResource: "/getPotato",
   detail: "You can found the resource consulting at: '/getPot' endpoint",
   consultedResource: '/getPotato'
 }
-```
-
-#### Default responses:
-```javascript
-
-  // Status300MultipleChoices
-  {
-    httpStatus: 300,
-    serverMessage: "Multiple Choices",
-  }
-
-  // Status301MovedPermanently
-  {
-    httpStatus: 301,
-    serverMessage: "Moved Permanently",
-  }
-
-  // Status302Found
-  {
-    httpStatus: 302,
-    serverMessage: "Found",
-  }
-
-  // Status303SeeOther
-  {
-    httpStatus: 303,
-    serverMessage: "See Other",
-  }
-
-  // Status304NotModified
-  {
-    httpStatus: 304,
-    serverMessage: "Not Modified",
-  }
-
-  // Status305UseProxy
-  {
-    httpStatus: 305,
-    serverMessage: "Use Proxy",
-  }
-
-  // Status307TemporaryRedirect
-  {
-    httpStatus: 307,
-    serverMessage: "Temporary Redirect",
-  }
-
-  // Status308PermanentRedirect
-  {
-    httpStatus: 308,
-    serverMessage: "Permanent Redirect",
-  }
 ```
 
 #### Status options:
@@ -788,7 +667,39 @@ Response3xxRedirection("301MovedPermanently", { consultedResource: "/getPotato",
           <li>Mandatory</li>
       </ul>
       </td>
-      <td>Status code of your response. *Supported: 400, 401, 402, 403, 404, 405, 406, 407, 408, 409, 410, 411, 412, 413, 414, 415, 416, 417, 418, 421, 422, 423, 424, 425, 426, 428, 429, 431, 451</td>
+      <td>Status code of your response. <br> Supported:
+      <ul>
+        <li>"400BadRequest": 400</li>
+        <li>"401Unauthorized": 401</li>
+        <li>"402PaymentRequired": 402</li>
+        <li>"403Forbidden": 403</li>
+        <li>"404NotFound": 404</li>
+        <li>"405MethodNotAllowed": 405</li>
+        <li>"406NotAcceptable": 406</li>
+        <li>"407ProxyAuthenticationRequired": 407</li>
+        <li>"408RequestTimeout": 408</li>
+        <li>"409Conflict": 409</li>
+        <li>"410Gone": 410</li>
+        <li>"411LengthRequired": 411</li>
+        <li>"412PreconditionFailed": 412</li>
+        <li>"413PayloadTooLarge": 413</li>
+        <li>"414URITooLong": 414</li>
+        <li>"415UnsupportedMediaType": 415</li>
+        <li>"416RangeNotSatisfiable": 416</li>
+        <li>"417ExpectationFailed": 417</li>
+        <li>"418ImATeapot": 418</li>
+        <li>"421MisdirectedRequest": 421</li>
+        <li>"422UnprocessableEntity": 422</li>
+        <li>"423Locked": 423</li>
+        <li>"424FailedDependency": 424</li>
+        <li>"425TooEarly": 425</li>
+        <li>"426UpgradeRequired": 426</li>
+        <li>"428PreconditionRequired": 428</li>
+        <li>"429TooManyRequests": 429</li>
+        <li>"431RequestHeaderFieldsTooLarge": 431</li>
+        <li>"451UnavailableForLegalReasons": 451</li>
+      </ul>
+      </td>
     </tr> 
     <tr>
       <td>input</td>
@@ -903,7 +814,450 @@ Response4xxClientError("404NotFound", { consultedResource: "/getPotato", errorCo
 }
 ```
 
-#### Default responses:
+#### Status options:
+
+<table>
+ <thead>
+  <tr>
+    <th>Method</th>
+    <th>Params</th>
+    <th>Description</th>
+  </tr>
+ </thead>
+ <tbody>
+  <tr>
+    <td>Status404Opt</td>
+    <td>
+      <ul>
+        <li>notFoundResource: string</li>
+      </ul>
+    </td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Status405Opt</td>
+    <td>
+      <ul>
+        <li>allowedMethods: string[] </li>
+      </ul>
+    </td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Status406Opt</td>
+    <td>
+      <ul>
+        <li>allowedRepresentations: string[] </li>
+      </ul>
+    </td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Status407Opt</td>
+    <td>
+      <ul>
+        <li>authenticationType: string</li>
+        <li>realm: string</li>
+      </ul>
+    </td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Status408Opt</td>
+    <td>
+      <ul>
+        <li>timeWaiting: string</li>
+      </ul>
+    </td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Status409Opt</td>
+    <td>
+      <ul>
+        <li>conflictResource: string</li>
+        <li>conflictId: string</li>
+      </ul>
+    </td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Status410Opt</td>
+    <td>
+      <ul>
+        <li>goneResource: string</li>
+        <li>reason: string</li>
+      </ul>
+    </td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Status411Opt</td>
+    <td>
+      -
+    </td>
+    <td>Adds the field 'requiredHeader': 'Content-Length'</td>
+  </tr>
+  <tr>
+    <td>Status413Opt</td>
+    <td>
+      <ul>
+        <li>maxAllowedSize: string</li>
+      </ul>
+    </td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Status414Opt</td>
+    <td>
+      <ul>
+        <li>maxAllowedLength: string</li>
+      </ul>
+    </td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Status415Opt</td>
+    <td>
+      <ul>
+        <li>supportedMediaTypes: string[] </li>
+      </ul>
+    </td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Status416Opt</td>
+    <td>
+      <ul>
+        <li>requestedContentRange: string</li>
+        <li>supportedContentRange: string</li>
+      </ul>
+    </td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Status423Opt</td>
+    <td>
+      <ul>
+        <li>lockedResource: string </li>
+      </ul>
+    </td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Status424Opt</td>
+    <td>
+      <ul>
+        <li>failedDependency: string</li>
+      </ul>
+    </td>
+    <td></td>
+  </tr>
+ </tbody>
+</table>
+
+### Response5xxServerError()
+
+#### Params:
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Attribute</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>statusCode</td>
+      <td>StatusCode5xx</td>
+      <td>
+      <ul>
+          <li>Mandatory</li>
+      </ul>
+      </td>
+      <td>Status code of your response. <br> Supported: 
+      <ul>
+        <li>"500InternalServerError": 500</li>
+        <li>"501NotImplemented": 501</li>
+        <li>"502BadGateway": 502</li>
+        <li>"503ServiceUnavailable": 503</li>
+        <li>"504GatewayTimeout": 504</li>
+        <li>"505HTTPVersionNotSupported": 505</li>
+        <li>"506VariantAlsoNegotiates": 506</li>
+        <li>"507InsufficientStorage": 507</li>
+        <li>"508LoopDetected": 508</li>
+        <li>"509BandwidthLimitExceeded": 509</li>
+        <li>"510NotExtended": 510</li>
+        <li>"511NetworkAuthenticationRequired": 511</li>
+        <li>"521ConnectionTimedOut": 521</li>
+      </ul>
+      </td>
+    </tr> 
+    <tr>
+      <td>input</td>
+      <td>BaseErrorInput</td>
+      <td>
+      <ul>
+          <li>Optional</li>
+      </ul>
+      </td>
+      <td>Base error input object</td>
+    </tr> 
+    <tr>
+      <td>input.consultedResource</td>
+      <td>string</td>
+      <td>
+      <ul>
+          <li>Optional</li>
+      </ul>
+      </td>
+      <td>URL or name of the consulted resource</td>
+    </tr> 
+    <tr>
+      <td>input.detail</td>
+      <td>string</td>
+      <td>
+      <ul>
+          <li>Optional</li>
+      </ul>
+      </td>
+      <td>Detail of the response</td>
+    </tr> 
+    <tr>
+      <td>input.serverMessage</td>
+      <td>string</td>
+      <td>
+      <ul>
+          <li>Optional</li>
+          <li>Default</li>
+      </ul>
+      </td>
+      <td>Message that the server will send to the client</td>
+    </tr> 
+    <tr>
+      <td>input.errorCode</td>
+      <td>string</td>
+      <td>
+      <ul>
+          <li>Optional</li>
+      </ul>
+      </td>
+      <td>Error identifier code</td>
+    </tr> 
+    <tr>
+      <td>input.errorDescription</td>
+      <td>string</td>
+      <td>
+      <ul>
+          <li>Optional</li>
+      </ul>
+      </td>
+      <td>Error description</td>
+    </tr> 
+    <tr>
+      <td>input.errorName</td>
+      <td>string</td>
+      <td>
+      <ul>
+          <li>Optional</li>
+      </ul>
+      </td>
+      <td>Error name</td>
+    </tr> 
+    <tr>
+      <td>input.errors</td>
+      <td>any</td>
+      <td>
+      <ul>
+          <li>Optional</li>
+      </ul>
+      </td>
+      <td>Arbitrary errors you can add to your response</td>
+    </tr> 
+  </tbody>
+</table>
+
+#### Example:
+
+> Output includes *success* and *error* fields by default.
+
+```javascript
+Response5xxServerError("500InternalServerError", { consultedResource: "/getPotato", errorCode: "500SERVERERROR", errorName: "INTERNAL_SERVER_ERROR" })
+
+// Output
+{
+  httpStatus: 500,
+  serverMessage: 'Internal Server Error',
+  consultedResource: '/getPotato',
+  errorCode: '500SERVERERROR',
+  errorName: 'INTERNAL_SERVER_ERROR',
+  error: true,
+  success: false
+}
+```
+
+## Default Responses
+
+### 100s
+
+```javascript
+// Status100Continue
+{
+  httpStatus: 100,
+  serverMessage: "Continue",
+  detail:
+    "Continue with the request",
+}
+
+// Status101SwitchingProtocols
+{
+  httpStatus: 101,
+  serverMessage: "Switching Protocols",
+}
+
+// Status102Processing
+{
+  httpStatus: 102,
+  serverMessage: "Processing",
+}
+
+// Status103EarlyHints
+{
+  httpStatus: 103,
+  serverMessage: "Checkpoint",
+}
+```
+
+### 200s
+
+```javascript
+
+  // Status200OK
+  {
+    httpStatus: 200,
+    serverMessage: "OK",
+    detail: "The request has been successfully processed"
+  }
+
+  // Status201Created
+  {
+    httpStatus: 201,
+    serverMessage: "Created",
+    detail: "Resource successfully created"
+  }
+
+  // Status202Accepted
+  {
+    httpStatus: 202,
+    serverMessage: "Accepted",
+    detail: "The request has been accepted for processing"
+  }
+
+  // Status203NonAuthoritativeInformation
+  {
+    httpStatus: 203,
+    serverMessage: "Non-Authoritative Information",
+    detail: "Non-Authoritative Information returned"
+  }
+
+  // Status204NoContent
+  {
+    httpStatus: 204
+  }
+
+  // Status205ResetContent
+  {
+    httpStatus: 205,
+    serverMessage: "Reset Content",
+    detail: "The request has been successfully processed, but no content is returned"
+  }
+
+  // Status206PartialContent
+  {
+    httpStatus: 206,
+    serverMessage: "Partial Content",
+    detail: "Partial Content returned"
+  }
+
+  // Status207MultiStatus
+  {
+    httpStatus: 207,
+    serverMessage: "Multi-Status",
+    detail: "Multi-Status returned"
+  }
+
+  // Status208AlreadyReported
+  {
+    httpStatus: 208,
+    serverMessage: "Already Reported",
+    detail: "Resource already reported"
+  }
+
+  // Status226IMUsed
+  {
+    httpStatus: 226,
+    serverMessage: "IM Used",
+    detail: "IM Used"
+  }
+```
+
+### 300s
+
+```javascript
+
+  // Status300MultipleChoices
+  {
+    httpStatus: 300,
+    serverMessage: "Multiple Choices",
+  }
+
+  // Status301MovedPermanently
+  {
+    httpStatus: 301,
+    serverMessage: "Moved Permanently",
+  }
+
+  // Status302Found
+  {
+    httpStatus: 302,
+    serverMessage: "Found",
+  }
+
+  // Status303SeeOther
+  {
+    httpStatus: 303,
+    serverMessage: "See Other",
+  }
+
+  // Status304NotModified
+  {
+    httpStatus: 304,
+    serverMessage: "Not Modified",
+  }
+
+  // Status305UseProxy
+  {
+    httpStatus: 305,
+    serverMessage: "Use Proxy",
+  }
+
+  // Status307TemporaryRedirect
+  {
+    httpStatus: 307,
+    serverMessage: "Temporary Redirect",
+  }
+
+  // Status308PermanentRedirect
+  {
+    httpStatus: 308,
+    serverMessage: "Permanent Redirect",
+  }
+```
+
+### 400s
 
 ```javascript
 
@@ -1083,276 +1437,7 @@ Response4xxClientError("404NotFound", { consultedResource: "/getPotato", errorCo
   }
 ```
 
-#### Status options:
-
-<table>
- <thead>
-  <tr>
-    <th>Method</th>
-    <th>Params</th>
-    <th>Description</th>
-  </tr>
- </thead>
- <tbody>
-  <tr>
-    <td>Status404Opt</td>
-    <td>
-      <ul>
-        <li>notFoundResource: string</li>
-      </ul>
-    </td>
-    <td></td>
-  </tr>
-  <tr>
-    <td>Status405Opt</td>
-    <td>
-      <ul>
-        <li>allowedMethods: string[] </li>
-      </ul>
-    </td>
-    <td></td>
-  </tr>
-  <tr>
-    <td>Status406Opt</td>
-    <td>
-      <ul>
-        <li>allowedRepresentations: string[] </li>
-      </ul>
-    </td>
-    <td></td>
-  </tr>
-  <tr>
-    <td>Status407Opt</td>
-    <td>
-      <ul>
-        <li>authenticationType: string</li>
-        <li>realm: string</li>
-      </ul>
-    </td>
-    <td></td>
-  </tr>
-  <tr>
-    <td>Status408Opt</td>
-    <td>
-      <ul>
-        <li>timeWaiting: string</li>
-      </ul>
-    </td>
-    <td></td>
-  </tr>
-  <tr>
-    <td>Status409Opt</td>
-    <td>
-      <ul>
-        <li>conflictResource: string</li>
-        <li>conflictId: string</li>
-      </ul>
-    </td>
-    <td></td>
-  </tr>
-  <tr>
-    <td>Status410Opt</td>
-    <td>
-      <ul>
-        <li>goneResource: string</li>
-        <li>reason: string</li>
-      </ul>
-    </td>
-    <td></td>
-  </tr>
-  <tr>
-    <td>Status411Opt</td>
-    <td>
-      -
-    </td>
-    <td>Adds the field 'requiredHeader': 'Content-Length'</td>
-  </tr>
-  <tr>
-    <td>Status413Opt</td>
-    <td>
-      <ul>
-        <li>maxAllowedSize: string</li>
-      </ul>
-    </td>
-    <td></td>
-  </tr>
-  <tr>
-    <td>Status414Opt</td>
-    <td>
-      <ul>
-        <li>maxAllowedLength: string</li>
-      </ul>
-    </td>
-    <td></td>
-  </tr>
-  <tr>
-    <td>Status415Opt</td>
-    <td>
-      <ul>
-        <li>supportedMediaTypes: string[] </li>
-      </ul>
-    </td>
-    <td></td>
-  </tr>
-  <tr>
-    <td>Status416Opt</td>
-    <td>
-      <ul>
-        <li>requestedContentRange: string</li>
-        <li>supportedContentRange: string</li>
-      </ul>
-    </td>
-    <td></td>
-  </tr>
-  <tr>
-    <td>Status423Opt</td>
-    <td>
-      <ul>
-        <li>lockedResource: string </li>
-      </ul>
-    </td>
-    <td></td>
-  </tr>
-  <tr>
-    <td>Status424Opt</td>
-    <td>
-      <ul>
-        <li>failedDependency: string</li>
-      </ul>
-    </td>
-    <td></td>
-  </tr>
- </tbody>
-</table>
-
-### Response5xxServerError()
-
-#### Params:
-
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Attribute</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>statusCode</td>
-      <td>StatusCode5xx</td>
-      <td>
-      <ul>
-          <li>Mandatory</li>
-      </ul>
-      </td>
-      <td>Status code of your response. *Supported: 500, 501, 502, 503, 504, 505, 506, 507, 508, 509, 510, 511, 521</td>
-    </tr> 
-    <tr>
-      <td>input</td>
-      <td>BaseErrorInput</td>
-      <td>
-      <ul>
-          <li>Optional</li>
-      </ul>
-      </td>
-      <td>Base error input object</td>
-    </tr> 
-    <tr>
-      <td>input.consultedResource</td>
-      <td>string</td>
-      <td>
-      <ul>
-          <li>Optional</li>
-      </ul>
-      </td>
-      <td>URL or name of the consulted resource</td>
-    </tr> 
-    <tr>
-      <td>input.detail</td>
-      <td>string</td>
-      <td>
-      <ul>
-          <li>Optional</li>
-      </ul>
-      </td>
-      <td>Detail of the response</td>
-    </tr> 
-    <tr>
-      <td>input.serverMessage</td>
-      <td>string</td>
-      <td>
-      <ul>
-          <li>Optional</li>
-          <li>Default</li>
-      </ul>
-      </td>
-      <td>Message that the server will send to the client</td>
-    </tr> 
-    <tr>
-      <td>input.errorCode</td>
-      <td>string</td>
-      <td>
-      <ul>
-          <li>Optional</li>
-      </ul>
-      </td>
-      <td>Error identifier code</td>
-    </tr> 
-    <tr>
-      <td>input.errorDescription</td>
-      <td>string</td>
-      <td>
-      <ul>
-          <li>Optional</li>
-      </ul>
-      </td>
-      <td>Error description</td>
-    </tr> 
-    <tr>
-      <td>input.errorName</td>
-      <td>string</td>
-      <td>
-      <ul>
-          <li>Optional</li>
-      </ul>
-      </td>
-      <td>Error name</td>
-    </tr> 
-    <tr>
-      <td>input.errors</td>
-      <td>any</td>
-      <td>
-      <ul>
-          <li>Optional</li>
-      </ul>
-      </td>
-      <td>Arbitrary errors you can add to your response</td>
-    </tr> 
-  </tbody>
-</table>
-
-#### Example:
-
-> Output includes *success* and *error* fields by default.
-
-```javascript
-Response5xxServerError("500InternalServerError", { consultedResource: "/getPotato", errorCode: "500SERVERERROR", errorName: "INTERNAL_SERVER_ERROR" })
-
-// Output
-{
-  httpStatus: 500,
-  serverMessage: 'Internal Server Error',
-  consultedResource: '/getPotato',
-  errorCode: '500SERVERERROR',
-  errorName: 'INTERNAL_SERVER_ERROR',
-  error: true,
-  success: false
-}
-```
-
-#### Default responses:
+### 500s
 
 ```javascript
   // Status500InternalServerError
