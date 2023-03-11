@@ -1,6 +1,6 @@
-import { GenericClientErrorResponse, GenericRedirectionResponse, GenericSuccessfullResponse } from "../interfaces/bases";
+import { GenericClientErrorResponse, GenericRedirectionResponse, GenericSuccessfulResponse } from "../interfaces/bases";
 
-export type Response2xxOpt = (props: GenericSuccessfullResponse) => {}
+export type Response2xxOpt = (props: GenericSuccessfulResponse) => {}
 
 export type Response3xxOpt = (props: GenericRedirectionResponse) => {}
 
